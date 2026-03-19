@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/rawmeat/repositories/fragarach/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

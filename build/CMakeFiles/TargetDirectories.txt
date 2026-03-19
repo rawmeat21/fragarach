@@ -1,0 +1,3 @@
+/home/rawmeat/repositories/fragarach/build/CMakeFiles/fragarach.dir
+/home/rawmeat/repositories/fragarach/build/CMakeFiles/edit_cache.dir
+/home/rawmeat/repositories/fragarach/build/CMakeFiles/rebuild_cache.dir
