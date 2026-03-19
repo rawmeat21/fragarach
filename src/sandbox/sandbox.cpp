@@ -12,6 +12,7 @@
 #include<sys/mount.h>
 #include<sys/syscall.h>
 #include<unistd.h>
+#include<chrono>
 
 
 static int childFunction(void*);
@@ -23,6 +24,26 @@ Sandbox::Sandbox(std::string_view binaryPath)
 const std::string& Sandbox::getBinaryPath()
 {
     return binaryPath;
+}
+
+const int Sandbox::getMemLimit()
+{
+    return memLimit;
+}
+
+const int Sandbox::getChildPID()
+{
+    return childPID;
+}
+
+const int Sandbox::getPIDLimit()
+{
+    return pidLimit;
+}
+
+const int Sandbox::getTimeoutTime()
+{
+    return timeoutTime;
 }
 
 Sandbox& Sandbox::setTimeout(int seconds)
@@ -39,6 +60,7 @@ Sandbox& Sandbox::setMemLimit(size_t bytes)
 
 void Sandbox::resetOverlay()
 {
+    // clean 
     system("rm -rf /opt/fragarach/overlay/upper/*");
     system("rm -rf /opt/fragarach/overlay/work/*");
 
@@ -48,13 +70,33 @@ void Sandbox::resetOverlay()
 }
 
 bool Sandbox::launch()
-{
-    resetOverlay();
+{    
     // launches the binary as a child process
+    resetOverlay();
 
-    const int STACK_SIZE=1024*1024;
+    std::cout<<binaryPath<<"is the binary path\n";
+    std::string copyCmd = "cp " + binaryPath + " /opt/fragarach/overlay/upper/target";
 
+
+    if(system(copyCmd.c_str()) != 0) {
+        std::cerr << "Failed to copy binary into sandbox\n";
+        return false;
+    }
+
+    system("chmod +x /opt/fragarach/overlay/upper/target");
+    
+
+    const int STACK_SIZE=1024*1024;// 1MB stack size for the child process
     std::vector<char> childStack(STACK_SIZE);
+
+    // launch a child process in a linux namespace
+
+    /*
+    CLONE_NEWPID- PID namespace (PID of child is 1), it cannot see other processes
+    CLONE_NEWNS- mount namespace (gives child its own mount table, system's mount table is untouched)
+    CLONE_NEWNET- network namespace (child has no connection to the newtork interfaces)
+    SIGCHILD- signal to the parent for cleanup
+    */
 
     childPID=clone(childFunction,childStack.data()+STACK_SIZE,CLONE_NEWPID | CLONE_NEWNS | CLONE_NEWNET | SIGCHLD,this);
 
@@ -64,10 +106,98 @@ bool Sandbox::launch()
         return false;
     }
 
+    // PID has been assigned, child process is running with childPID
     std::cout<<"Got PID: "<<childPID<<"\n";
 
-    int status;
-    waitpid(childPID,&status,0);
+
+    // create cgroup for this process
+    std::string cgroup="/sys/fs/cgroup/fragarach/";
+
+    // std::cout<<getChildPID()<<"\n";
+    system(std::string("mkdir "+cgroup+std::to_string(getChildPID())).c_str());
+
+    int fd=open((std::string(cgroup)+std::to_string(getChildPID())+"/memory.max").c_str(),O_WRONLY);
+
+    if(fd==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    std::string data=std::to_string(getMemLimit());
+    write(fd,data.c_str(),data.size());
+    close(fd);
+
+    fd=open((std::string(cgroup)+std::to_string(getChildPID())+"/pids.max").c_str(),O_WRONLY);
+
+    if(fd==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    data=std::to_string(getPIDLimit());
+    write(fd,data.c_str(),data.size());
+    close(fd);
+
+    fd=open((std::string(cgroup)+std::to_string(getChildPID())+"/cgroup.procs").c_str(),O_WRONLY);
+
+    if(fd==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    data=std::to_string(getChildPID());
+    write(fd,data.c_str(),data.size());
+    close(fd);
+
+    fd=open((std::string(cgroup)+std::to_string(getChildPID())+"/cpu.max").c_str(),O_WRONLY);
+
+    if(fd==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    data="50000 100000";
+    write(fd,data.c_str(),data.size());
+    close(fd);
+
+
+    int status{};// status signal after child dies
+    auto start=std::chrono::steady_clock::now();
+    while (true)
+    {
+        // check if child is done
+        int res=waitpid(childPID,&status,WNOHANG);
+
+        // child dead
+        if(res==childPID)
+        {
+            std::cout<<"Child is dead\n";
+            cleanup();
+            break;
+        } 
+
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
+
+        if(elapsed>=timeoutTime)
+        {
+            std::cerr<<"Sandbox timed out, killing child...\n";
+
+            // kill child
+            kill(childPID,SIGKILL);
+            // collect dead child
+            waitpid(childPID,&status,0);
+
+            cleanup();
+            break;
+        }
+
+        usleep(1e5);
+    }
 
     return true;
 }
@@ -76,8 +206,7 @@ static int childFunction(void* arg)
 {
     // this function will run inside the namespace
 
-    // system("pwd");
-
+    // get the original sandbox object (passed into clone() earlier in Sandbox::launch())
     Sandbox* sb=static_cast<Sandbox*>(arg);
 
     const char* lower  = "/opt/fragarach/rootfs";
@@ -85,17 +214,24 @@ static int childFunction(void* arg)
     const char* work   = "/opt/fragarach/overlay/work";
     const char* merged = "/opt/fragarach/overlay/merged";
 
+    // unmount the filesystem at merged (safety cleanup incase previous overlay crashed or something)
+    // MNT_DETACH- detach from tree immediately
     umount2(merged,MNT_DETACH);
+
 
     std::string opts="lowerdir="+std::string(lower)+",upperdir="+std::string(upper)+",workdir="+std::string(work);
 
-
+    // create an overlay filesystem
+    // writes go to upper only
+    // lower is untouched
+    // merged is a view of upper and lower
     if(mount("overlay",merged,"overlay",0,opts.c_str()))
     {
         std::cerr<<"Overlay mount failed: "<<strerror(errno)<<"\n";
         return 1;
     }
 
+    // remounts / and all other mountpts under it as private
     if(mount(nullptr, "/", nullptr, MS_REC | MS_PRIVATE, nullptr))
     {
         std::cerr << "remount private failed: " << strerror(errno) << "\n";
@@ -108,18 +244,19 @@ static int childFunction(void* arg)
         return 1;
     }
 
+    // cd to merged
     if(chdir(merged))
     {
         std::cerr<<"chdir failed: "<<strerror(errno)<<"\n";
         return 1;
     }
-    // pivot root to current dir (merged)
+
+    // pivot root to current dir (merged), now the child has its root in merged overlayFS
     if(syscall(SYS_pivot_root,".","."))
     {
         std::cerr<<"pivot_root failed: "<<strerror(errno)<<"\n";
         return 1;
     }
-
 
     if(chdir("/"))
     {
@@ -132,8 +269,29 @@ static int childFunction(void* arg)
         std::cerr<<"umount failed: "<<strerror(errno)<<"\n";
     }
 
+    const char* path = "/target";// target is the binary we want to run
+
+    if(access("/target",F_OK))
+    {
+        std::cerr<<"Yu are kooked lil bro\n";
+        return 1;
+    }
+    else std::cerr<<"target exists\n";
+
+    char* argv[] = {
+        const_cast<char*>(path),
+        nullptr
+    };
+
+    char* envp[] = {
+        const_cast<char*>("PATH=/usr/bin:/bin"),
+        const_cast<char*>("HOME=/root"),
+        nullptr
+    };
+
     // replace the child process by the binary process
-    execve(sb->getBinaryPath().c_str(),nullptr,nullptr);
+    system("ls");
+    execve(path,argv,envp);
 
     std::cerr<<"Failed to replace child process with target process: "<<strerror(errno)<<"\n";
     return 1;   
@@ -141,5 +299,7 @@ static int childFunction(void* arg)
 
 void Sandbox::cleanup()
 {
-
+    return;
+    rmdir(std::string("/sys/fs/cgroup/fragarach/"+std::to_string(childPID)).c_str());
+    resetOverlay();
 }
