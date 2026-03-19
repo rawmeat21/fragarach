@@ -164,43 +164,15 @@ bool Sandbox::launch()
     write(fd,data.c_str(),data.size());
     close(fd);
 
-
-    int status{};// status signal after child dies
-    auto start=std::chrono::steady_clock::now();
-    while (true)
-    {
-        // check if child is done
-        int res=waitpid(childPID,&status,WNOHANG);
-
-        // child dead
-        if(res==childPID)
-        {
-            std::cout<<"Child is dead\n";
-            cleanup();
-            break;
-        } 
-
-        auto now = std::chrono::steady_clock::now();
-        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
-
-        if(elapsed>=timeoutTime)
-        {
-            std::cerr<<"Sandbox timed out, killing child...\n";
-
-            // kill child
-            kill(childPID,SIGKILL);
-            // collect dead child
-            waitpid(childPID,&status,0);
-
-            cleanup();
-            break;
-        }
-
-        usleep(1e5);
-    }
-
     return true;
 }
+
+bool Sandbox::isRunning()
+{
+    int status;
+    return childPID!=waitpid(childPID,&status,WNOHANG);
+}
+
 
 static int childFunction(void* arg)
 {
@@ -299,7 +271,11 @@ static int childFunction(void* arg)
 
 void Sandbox::cleanup()
 {
-    return;
+    int status;
+    // kill child
+    kill(childPID,SIGKILL);
+    // collect dead child
+    waitpid(childPID,&status,0);
     rmdir(std::string("/sys/fs/cgroup/fragarach/"+std::to_string(childPID)).c_str());
     resetOverlay();
 }

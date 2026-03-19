@@ -4,6 +4,10 @@ fragarach: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   CMakeFiles/fragarach.dir/src/main.cpp.o \
   CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o \
+  CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libbpf.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libelf.so \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libz.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
@@ -30,7 +34,9 @@ fragarach: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/libgcc.a \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crtn.o \
-  /usr/lib/ld-linux-x86-64.so.2
+  /usr/lib/ld-linux-x86-64.so.2 \
+  /usr/lib32/libzstd.so.1 \
+  /usr/lib/libzstd.so.1
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/Scrt1.o:
 
@@ -41,6 +47,14 @@ fragarach: \
 CMakeFiles/fragarach.dir/src/main.cpp.o:
 
 CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o:
+
+CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libbpf.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libelf.so:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libz.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so:
 
@@ -95,3 +109,7 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o:
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crtn.o:
 
 /usr/lib/ld-linux-x86-64.so.2:
+
+/usr/lib32/libzstd.so.1:
+
+/usr/lib/libzstd.so.1:

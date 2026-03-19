@@ -1,6 +1,12 @@
 #include<iostream>
 #include<unistd.h>
 #include "sandbox/sandbox.h"
+#include "tracer/tracer.h"
+#include<chrono>
+#include<signal.h>
+#include<sys/types.h>
+#include<sys/wait.h>
+#include<sys/syscall.h>
 
 
 bool setup()
@@ -19,10 +25,9 @@ bool setup()
     // merged- combined view of /upper and /rootfs
     system("mkdir -p /opt/fragarach/overlay/merged");
 
-
     // create cgroup for fragarach
     system("mkdir -p /sys/fs/cgroup/fragarach/");
-    
+
     // enable memory, cpu, and pid controllers for child cgroups
     system("echo '+memory +cpu +pids' > /sys/fs/cgroup/cgroup.subtree_control");
     system("echo '+memory +cpu +pids' > /sys/fs/cgroup/fragarach/cgroup.subtree_control");
@@ -76,4 +81,32 @@ int main(int argc,char* argv[])
     sandbox.setTimeout(30);
 
     sandbox.launch();
+    Tracer tracer{sandbox.getChildPID()};
+    tracer.start();
+
+    auto start=std::chrono::steady_clock::now();
+
+    while (sandbox.isRunning())
+    {
+        auto now = std::chrono::steady_clock::now();
+        auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
+
+        if(elapsed>=sandbox.getTimeoutTime())
+        {
+            std::cerr<<"Sandbox timed out, killing child...\n";
+            break;
+        }
+
+        tracer.poll();
+
+        usleep(1e5);
+    }
+
+    tracer.stop();
+    sandbox.cleanup();
+
+    for(auto& e : tracer.getEvents())
+    {
+        std::cout << "PID: " << e.pid << " SYSCALL: " << e.syscall_nr << " TIME: " << e.timestamp << "\n";
+    }
 }

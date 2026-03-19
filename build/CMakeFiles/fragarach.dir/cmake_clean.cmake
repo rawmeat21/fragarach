@@ -4,6 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/fragarach.dir/src/main.cpp.o.d"
   "CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o"
   "CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o.d"
+  "CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o"
+  "CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o.d"
   "fragarach"
   "fragarach.pdb"
 )

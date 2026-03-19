@@ -19,7 +19,9 @@ public:
 
     void resetOverlay();
     bool launch();
+    bool isRunning();
     void cleanup();
+    
 
 private:
     std::string binaryPath;
