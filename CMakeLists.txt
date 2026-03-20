@@ -8,6 +8,7 @@ add_executable(fragarach
     src/main.cpp
     src/sandbox/sandbox.cpp
     src/tracer/tracer.cpp
+    src/syscall_graph/syscallGraph.cpp
 )
 
 

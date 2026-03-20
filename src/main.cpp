@@ -2,6 +2,7 @@
 #include<unistd.h>
 #include "sandbox/sandbox.h"
 #include "tracer/tracer.h"
+#include "syscall_graph/syscallGraph.h"
 #include<chrono>
 #include<signal.h>
 #include<sys/types.h>
@@ -109,4 +110,15 @@ int main(int argc,char* argv[])
     {
         std::cout << "PID: " << e.pid << " SYSCALL: " << e.syscall_nr << " TIME: " << e.timestamp << "\n";
     }
+
+    SyscallGraph sg{};
+
+    sg.build(tracer.getEvents());
+
+    COOGraph cg=sg.cooExport();
+
+    // for(int i=0;i<cg.from.size();++i)
+    // {
+    //     std::cout<<cg.from[i]<<' '<<cg.to[i]<<' '<<cg.weights[i]<<"\n";
+    // }
 }

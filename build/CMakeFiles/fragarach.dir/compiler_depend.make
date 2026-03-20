@@ -775,11 +775,14 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
 fragarach: /usr/lib/Scrt1.o \
   /usr/lib/crti.o \
   /usr/lib/crtn.o \
+  /usr/lib/libbpf.so \
   /usr/lib/libc.so \
+  /usr/lib/libelf.so \
   /usr/lib/libgcc_s.so \
   /usr/lib/libgcc_s.so.1 \
   /usr/lib/libm.so \
   /usr/lib/libstdc++.so \
+  /usr/lib/libz.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtendS.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/libgcc.a \
@@ -788,13 +791,18 @@ fragarach: /usr/lib/Scrt1.o \
   /usr/lib/libc_nonshared.a \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libzstd.so.1 \
+  /usr/lib32/libzstd.so.1 \
   CMakeFiles/fragarach.dir/src/main.cpp.o \
-  CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o
+  CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o \
+  CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o
 
 
 CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o:
 
 CMakeFiles/fragarach.dir/src/main.cpp.o:
+
+/usr/lib/libzstd.so.1:
 
 /usr/lib/libmvec.so.1:
 
@@ -812,9 +820,15 @@ CMakeFiles/fragarach.dir/src/main.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/crtbeginS.o:
 
+/usr/lib/libz.so:
+
 /usr/lib/libm.so:
 
 /usr/lib/libgcc_s.so.1:
+
+/usr/lib/libelf.so:
+
+/usr/lib/libbpf.so:
 
 /usr/lib/crti.o:
 
@@ -933,6 +947,8 @@ tracer.skel.h:
 /usr/include/bpf/libbpf_legacy.h:
 
 /usr/include/bits/struct_rwlock.h:
+
+CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
 
 /usr/include/bits/types/sigval_t.h:
 
@@ -1139,6 +1155,8 @@ tracer.skel.h:
 /usr/include/asm-generic/int-ll64.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stddef.h:
+
+/usr/lib32/libzstd.so.1:
 
 /usr/include/c++/15.2.1/bits/allocator.h:
 

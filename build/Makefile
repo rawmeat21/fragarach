@@ -190,6 +190,30 @@ src/sandbox/sandbox.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.s
 .PHONY : src/sandbox/sandbox.cpp.s
 
+src/syscall_graph/syscallGraph.o: src/syscall_graph/syscallGraph.cpp.o
+.PHONY : src/syscall_graph/syscallGraph.o
+
+# target to build an object file
+src/syscall_graph/syscallGraph.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.o
+.PHONY : src/syscall_graph/syscallGraph.cpp.o
+
+src/syscall_graph/syscallGraph.i: src/syscall_graph/syscallGraph.cpp.i
+.PHONY : src/syscall_graph/syscallGraph.i
+
+# target to preprocess a source file
+src/syscall_graph/syscallGraph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.i
+.PHONY : src/syscall_graph/syscallGraph.cpp.i
+
+src/syscall_graph/syscallGraph.s: src/syscall_graph/syscallGraph.cpp.s
+.PHONY : src/syscall_graph/syscallGraph.s
+
+# target to generate assembly for a file
+src/syscall_graph/syscallGraph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.s
+.PHONY : src/syscall_graph/syscallGraph.cpp.s
+
 src/tracer/tracer.o: src/tracer/tracer.cpp.o
 .PHONY : src/tracer/tracer.o
 
@@ -230,6 +254,9 @@ help:
 	@echo "... src/sandbox/sandbox.o"
 	@echo "... src/sandbox/sandbox.i"
 	@echo "... src/sandbox/sandbox.s"
+	@echo "... src/syscall_graph/syscallGraph.o"
+	@echo "... src/syscall_graph/syscallGraph.i"
+	@echo "... src/syscall_graph/syscallGraph.s"
 	@echo "... src/tracer/tracer.o"
 	@echo "... src/tracer/tracer.i"
 	@echo "... src/tracer/tracer.s"
