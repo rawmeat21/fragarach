@@ -8,6 +8,8 @@
 #include<string.h>
 #include<fcntl.h>
 #include<sys/wait.h>
+#include<sys/stat.h>
+#include<stdio.h>
 
 void mkdirP(const std::string& path)
 {
@@ -38,24 +40,27 @@ void rmRF(const std::string& path)
 
     while ((ch=readdir(dir)))
     {
-        if(ch->d_type==DT_REG)
-        {            
-            std::string mod=path;
-            if(mod[mod.size()-1]!='/') mod.push_back('/');
-            mod.append(ch->d_name);
+        if(strcmp(ch->d_name, ".") == 0 || strcmp(ch->d_name, "..") == 0) continue;    
+                
+        struct stat st;
+        std::string mod=path;
+        if(mod[mod.size()-1]!='/') mod.push_back('/');
+        mod.append(ch->d_name);
 
-            int status;
+        lstat(mod.c_str(), &st);
 
-            status=unlink(mod.c_str());
-
-            if(status) std::cerr<<"Error deleting file "<<ch->d_name<<": "<<strerror(errno)<<"\n";
-        }
-        else if(ch->d_type==DT_DIR && strcmp(ch->d_name,".") && strcmp(ch->d_name,".."))
+        if(S_ISLNK(st.st_mode))
         {
-            std::string mod=path;
-            if(mod[mod.size()-1]!='/') mod.push_back('/');
-            mod.append(ch->d_name);
-            rmRF(mod);
+            unlink(mod.c_str());
+        }
+        else if(S_ISREG(st.st_mode))
+        {
+            unlink(mod.c_str());
+        }
+        else if(S_ISDIR(st.st_mode))
+        {
+            
+            rmRF(mod); // safe to recurse, we know it's a real directory
         }
     }
 
@@ -146,4 +151,13 @@ int run(const char* path,char* const args[])
     }
 
     return 0;
+}
+
+int is_fd_open(int fd) {
+    if (fcntl(fd, F_GETFD) == -1) {
+        if (errno == EBADF) {
+            return 0;
+        }
+    }
+    return 1;
 }

@@ -187,9 +187,13 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: \
  /usr/include/sys/syscall.h /usr/include/asm/unistd.h \
  /usr/include/asm/unistd_64.h /usr/include/bits/syscall.h \
  /usr/include/sys/capability.h /usr/include/linux/capability.h \
- /usr/include/c++/15.2.1/chrono /usr/include/c++/15.2.1/bits/chrono.h \
- /usr/include/c++/15.2.1/ratio /usr/include/c++/15.2.1/cstdint \
- /usr/include/c++/15.2.1/limits /usr/include/c++/15.2.1/ctime \
+ /usr/include/seccomp.h /usr/include/elf.h /usr/include/inttypes.h \
+ /usr/include/c++/15.2.1/stdlib.h /usr/include/linux/audit.h \
+ /usr/include/linux/elf-em.h /usr/include/linux/seccomp.h \
+ /usr/include/seccomp-syscalls.h /usr/include/c++/15.2.1/chrono \
+ /usr/include/c++/15.2.1/bits/chrono.h /usr/include/c++/15.2.1/ratio \
+ /usr/include/c++/15.2.1/cstdint /usr/include/c++/15.2.1/limits \
+ /usr/include/c++/15.2.1/ctime \
  /usr/include/c++/15.2.1/bits/parse_numbers.h \
  /home/rawmeat/repositories/fragarach/src/sandbox/../helper_functions.h \
  /usr/include/sys/stat.h /usr/include/bits/statx.h \

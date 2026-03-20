@@ -21,8 +21,10 @@ public:
     bool launch();
     bool isRunning();
     void cleanup();
+    int getNotifyFd();
     int syncPipe[2];
-
+    int seccompPipe[2];
+    
 private:
     std::string binaryPath;
     int timeoutTime=60;

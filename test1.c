@@ -14,6 +14,8 @@ int main()
     } else {
         printf("The process is not running as root (EUID = %d).\n", euid);
     }
+
+    
     
     return 0;
 }

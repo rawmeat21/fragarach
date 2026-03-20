@@ -13,3 +13,4 @@ void mkdirP(const std::string& path);
 void rmRF(const std::string& path);
 int cpy(const std::string& from,const std::string& to);
 int run(const char* path,char* const args[]);
+int is_fd_open(int fd);

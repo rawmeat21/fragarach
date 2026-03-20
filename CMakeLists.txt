@@ -4,6 +4,10 @@ project(fragarach)
 
 set(CMAKE_CXX_STANDARD 17)
 
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(SECCOMP REQUIRED IMPORTED_TARGET libseccomp)
+
 add_executable(fragarach
     src/main.cpp
     src/sandbox/sandbox.cpp
@@ -33,5 +37,5 @@ add_custom_target(bpf_tracer
 add_dependencies(fragarach bpf_tracer)
 
 target_include_directories(fragarach PRIVATE src ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(fragarach PRIVATE bpf elf z cap)
+target_link_libraries(fragarach PRIVATE bpf elf z cap PkgConfig::SECCOMP)
 

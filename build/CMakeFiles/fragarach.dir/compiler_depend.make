@@ -870,6 +870,7 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: /home/rawmeat/repositories/f
   /usr/include/c++/15.2.1/pstl/pstl_config.h \
   /usr/include/c++/15.2.1/ratio \
   /usr/include/c++/15.2.1/stdexcept \
+  /usr/include/c++/15.2.1/stdlib.h \
   /usr/include/c++/15.2.1/streambuf \
   /usr/include/c++/15.2.1/string \
   /usr/include/c++/15.2.1/string_view \
@@ -891,6 +892,7 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: /home/rawmeat/repositories/f
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
   /usr/include/ctype.h \
   /usr/include/dirent.h \
+  /usr/include/elf.h \
   /usr/include/endian.h \
   /usr/include/errno.h \
   /usr/include/fcntl.h \
@@ -898,8 +900,11 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: /home/rawmeat/repositories/f
   /usr/include/features.h \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
+  /usr/include/inttypes.h \
+  /usr/include/linux/audit.h \
   /usr/include/linux/capability.h \
   /usr/include/linux/close_range.h \
+  /usr/include/linux/elf-em.h \
   /usr/include/linux/errno.h \
   /usr/include/linux/falloc.h \
   /usr/include/linux/ioctl.h \
@@ -908,6 +913,7 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: /home/rawmeat/repositories/f
   /usr/include/linux/openat2.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
+  /usr/include/linux/seccomp.h \
   /usr/include/linux/sockios.h \
   /usr/include/linux/stat.h \
   /usr/include/linux/stddef.h \
@@ -915,6 +921,8 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o: /home/rawmeat/repositories/f
   /usr/include/locale.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/seccomp-syscalls.h \
+  /usr/include/seccomp.h \
   /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
@@ -1271,34 +1279,54 @@ CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.o: /home/rawmeat/rep
 CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fragarach/src/tracer/tracer.cpp \
   tracer.skel.h \
   /home/rawmeat/repositories/fragarach/src/ebpf/event.h \
+  /home/rawmeat/repositories/fragarach/src/helper_functions.h \
+  /home/rawmeat/repositories/fragarach/src/sandbox/sandbox.h \
   /home/rawmeat/repositories/fragarach/src/tracer/tracer.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/asm-generic/int-ll64.h \
+  /usr/include/asm-generic/ioctl.h \
+  /usr/include/asm-generic/ioctls.h \
   /usr/include/asm-generic/posix_types.h \
+  /usr/include/asm-generic/sockios.h \
   /usr/include/asm-generic/types.h \
   /usr/include/asm/bitsperlong.h \
   /usr/include/asm/errno.h \
+  /usr/include/asm/ioctl.h \
+  /usr/include/asm/ioctls.h \
   /usr/include/asm/posix_types.h \
   /usr/include/asm/posix_types_64.h \
+  /usr/include/asm/sockios.h \
   /usr/include/asm/types.h \
+  /usr/include/asm/unistd.h \
+  /usr/include/asm/unistd_64.h \
   /usr/include/bits/atomic_wide_counter.h \
   /usr/include/bits/byteswap.h \
   /usr/include/bits/confname.h \
   /usr/include/bits/cpu-set.h \
+  /usr/include/bits/dirent.h \
+  /usr/include/bits/dirent_ext.h \
   /usr/include/bits/endian.h \
   /usr/include/bits/endianness.h \
   /usr/include/bits/environments.h \
   /usr/include/bits/errno.h \
+  /usr/include/bits/fcntl-linux.h \
+  /usr/include/bits/fcntl.h \
   /usr/include/bits/floatn-common.h \
   /usr/include/bits/floatn.h \
   /usr/include/bits/getopt_core.h \
   /usr/include/bits/getopt_posix.h \
+  /usr/include/bits/ioctl-types.h \
+  /usr/include/bits/ioctls.h \
   /usr/include/bits/libc-header-start.h \
+  /usr/include/bits/local_lim.h \
   /usr/include/bits/locale.h \
   /usr/include/bits/long-double.h \
+  /usr/include/bits/openat2.h \
+  /usr/include/bits/poll.h \
+  /usr/include/bits/posix1_lim.h \
   /usr/include/bits/posix_opt.h \
   /usr/include/bits/pthread_stack_min-dynamic.h \
   /usr/include/bits/pthreadtypes-arch.h \
@@ -1306,6 +1334,9 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
   /usr/include/bits/sched.h \
   /usr/include/bits/select.h \
   /usr/include/bits/setjmp.h \
+  /usr/include/bits/stat.h \
+  /usr/include/bits/statx-generic.h \
+  /usr/include/bits/statx.h \
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-least.h \
   /usr/include/bits/stdint-uintn.h \
@@ -1313,6 +1344,8 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
+  /usr/include/bits/struct_stat.h \
+  /usr/include/bits/syscall.h \
   /usr/include/bits/thread-shared-types.h \
   /usr/include/bits/time.h \
   /usr/include/bits/time64.h \
@@ -1335,8 +1368,11 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
   /usr/include/bits/types/sigset_t.h \
   /usr/include/bits/types/struct_FILE.h \
   /usr/include/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/bits/types/struct_iovec.h \
   /usr/include/bits/types/struct_itimerspec.h \
   /usr/include/bits/types/struct_sched_param.h \
+  /usr/include/bits/types/struct_statx.h \
+  /usr/include/bits/types/struct_statx_timestamp.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
   /usr/include/bits/types/struct_tm.h \
@@ -1465,23 +1501,39 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/gthr.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
   /usr/include/ctype.h \
+  /usr/include/dirent.h \
+  /usr/include/elf.h \
   /usr/include/endian.h \
   /usr/include/errno.h \
+  /usr/include/fcntl.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
   /usr/include/gnu/stubs-64.h \
   /usr/include/gnu/stubs.h \
+  /usr/include/inttypes.h \
+  /usr/include/linux/audit.h \
   /usr/include/linux/bpf.h \
   /usr/include/linux/bpf_common.h \
   /usr/include/linux/close_range.h \
+  /usr/include/linux/elf-em.h \
   /usr/include/linux/errno.h \
+  /usr/include/linux/falloc.h \
+  /usr/include/linux/ioctl.h \
+  /usr/include/linux/limits.h \
+  /usr/include/linux/openat2.h \
   /usr/include/linux/posix_types.h \
   /usr/include/linux/sched/types.h \
+  /usr/include/linux/seccomp.h \
+  /usr/include/linux/sockios.h \
+  /usr/include/linux/stat.h \
   /usr/include/linux/stddef.h \
   /usr/include/linux/types.h \
   /usr/include/locale.h \
+  /usr/include/poll.h \
   /usr/include/pthread.h \
   /usr/include/sched.h \
+  /usr/include/seccomp-syscalls.h \
+  /usr/include/seccomp.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
   /usr/include/stdio.h \
@@ -1489,8 +1541,13 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o: /home/rawmeat/repositories/fra
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/sys/cdefs.h \
+  /usr/include/sys/ioctl.h \
+  /usr/include/sys/poll.h \
   /usr/include/sys/select.h \
   /usr/include/sys/single_threaded.h \
+  /usr/include/sys/stat.h \
+  /usr/include/sys/syscall.h \
+  /usr/include/sys/ttydefaults.h \
   /usr/include/sys/types.h \
   /usr/include/time.h \
   /usr/include/unistd.h \
@@ -1521,6 +1578,7 @@ fragarach: /usr/lib/Scrt1.o \
   /usr/lib/libc_nonshared.a \
   /usr/lib/libm.so.6 \
   /usr/lib/libmvec.so.1 \
+  /usr/lib/libseccomp.so \
   /usr/lib/libzstd.so.1 \
   /usr/lib32/libzstd.so.1 \
   CMakeFiles/fragarach.dir/src/helper_functions.cpp.o \
@@ -1566,21 +1624,21 @@ CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o:
 
 /usr/lib/crti.o:
 
-/usr/lib/Scrt1.o:
-
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdbool.h:
 
-/usr/include/linux/bpf_common.h:
+/usr/include/sys/poll.h:
 
-/usr/include/c++/15.2.1/stdlib.h:
+/usr/include/poll.h:
+
+/usr/include/linux/bpf_common.h:
 
 /usr/include/bpf/libbpf_version.h:
 
 /usr/include/bpf/libbpf_common.h:
 
-tracer.skel.h:
+/usr/include/bits/poll.h:
 
-/home/rawmeat/repositories/fragarach/src/tracer/tracer.cpp:
+tracer.skel.h:
 
 /home/rawmeat/repositories/fragarach/src/syscall_graph/syscallGraph.cpp:
 
@@ -1588,7 +1646,19 @@ tracer.skel.h:
 
 /usr/include/sys/ioctl.h:
 
+/usr/lib/Scrt1.o:
+
+/usr/include/seccomp.h:
+
 /usr/include/linux/capability.h:
+
+/home/rawmeat/repositories/fragarach/src/tracer/tracer.cpp:
+
+/usr/include/linux/audit.h:
+
+/usr/include/elf.h:
+
+/usr/include/c++/15.2.1/stdlib.h:
 
 /usr/include/bits/ioctls.h:
 
@@ -1641,6 +1711,8 @@ tracer.skel.h:
 /usr/include/c++/15.2.1/locale:
 
 /usr/include/c++/15.2.1/ext/aligned_buffer.h:
+
+/usr/include/inttypes.h:
 
 /usr/include/c++/15.2.1/cstring:
 
@@ -1834,6 +1906,8 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
 
 /usr/include/bits/types/__fpos_t.h:
 
+/usr/include/seccomp-syscalls.h:
+
 /usr/include/bits/types/clock_t.h:
 
 /usr/include/bits/types/__fpos64_t.h:
@@ -1853,6 +1927,8 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
 /usr/include/c++/15.2.1/bits/align.h:
 
 /usr/include/c++/15.2.1/debug/debug.h:
+
+/usr/include/linux/seccomp.h:
 
 /usr/include/c++/15.2.1/type_traits:
 
@@ -2019,6 +2095,8 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
 /usr/include/c++/15.2.1/bits/fs_fwd.h:
 
 /usr/include/bits/pthreadtypes-arch.h:
+
+/usr/include/linux/elf-em.h:
 
 /usr/include/sys/wait.h:
 
@@ -2409,6 +2487,8 @@ CMakeFiles/fragarach.dir/src/main.cpp.o:
 /usr/include/c++/15.2.1/bits/shared_ptr.h:
 
 /usr/include/sys/single_threaded.h:
+
+/usr/lib/libseccomp.so:
 
 /usr/include/unistd.h:
 

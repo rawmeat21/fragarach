@@ -127,11 +127,16 @@ int main(int argc,char* argv[])
     sandbox.setTimeout(30);
 
     sandbox.launch();
-    Tracer tracer{sandbox.getChildPID()};
+    Tracer tracer{sandbox};
+    std::cout<<"Tracer start\n";
     tracer.start();
+    std::cout<<"Tracer started\n";
 
     write(sandbox.syncPipe[1],"x",1); // write to pipe, only now child will run
+    // std::cerr<<strerror(errno)<<"\n";
     close(sandbox.syncPipe[1]);
+
+    std::cout<<"Checking start\n";
 
     auto start=std::chrono::steady_clock::now();
 
@@ -147,10 +152,12 @@ int main(int argc,char* argv[])
             break;
         }
 
-        tracer.poll();
-
+        std::cout<<"Enter poll\n";
+        tracer.pollmethod();
+        std::cout<<"Exit poll\n";
         usleep(1e5);
     }
+
     std::cout<<"Sandbox closed\n";
 
     tracer.stop();
@@ -159,6 +166,7 @@ int main(int argc,char* argv[])
     std::cout<<"Number of syscalls: "<<tracer.getEvents().size()<<"\n";
     for(auto& e : tracer.getEvents())
     {
+        if(e.blocked) std::cout << "[BLOCKED] ";
         std::cout << "PID: " << e.pid << " SYSCALL: " << e.syscall_nr << " TIME: " << e.timestamp << "\n";
     }
 
