@@ -9,6 +9,7 @@ add_executable(fragarach
     src/sandbox/sandbox.cpp
     src/tracer/tracer.cpp
     src/syscall_graph/syscallGraph.cpp
+    src/helper_functions.cpp
 )
 
 
@@ -32,4 +33,5 @@ add_custom_target(bpf_tracer
 add_dependencies(fragarach bpf_tracer)
 
 target_include_directories(fragarach PRIVATE src ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(fragarach PRIVATE bpf elf z)
+target_link_libraries(fragarach PRIVATE bpf elf z cap)
+

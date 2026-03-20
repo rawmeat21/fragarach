@@ -11,9 +11,10 @@
 #include<sys/wait.h>
 #include<sys/mount.h>
 #include<sys/syscall.h>
+#include<sys/capability.h>
 #include<unistd.h>
 #include<chrono>
-
+#include "../helper_functions.h"
 
 static int childFunction(void*);
 
@@ -61,12 +62,13 @@ Sandbox& Sandbox::setMemLimit(size_t bytes)
 void Sandbox::resetOverlay()
 {
     // clean 
-    system("rm -rf /opt/fragarach/overlay/upper/*");
-    system("rm -rf /opt/fragarach/overlay/work/*");
 
-    system("mkdir -p /opt/fragarach/overlay/upper");
-    system("mkdir -p /opt/fragarach/overlay/work");
-    system("mkdir -p /opt/fragarach/overlay/merged");    
+    rmRF("/opt/fragarach/overlay/upper/");
+    rmRF("/opt/fragarach/overlay/work/");
+
+    mkdirP("/opt/fragarach/overlay/upper");
+    mkdirP("/opt/fragarach/overlay/work");   
+    mkdirP("/opt/fragarach/overlay/merged");
 }
 
 bool Sandbox::launch()
@@ -74,17 +76,13 @@ bool Sandbox::launch()
     // launches the binary as a child process
     resetOverlay();
 
-    std::cout<<binaryPath<<"is the binary path\n";
-    std::string copyCmd = "cp " + binaryPath + " /opt/fragarach/overlay/upper/target";
-
-
-    if(system(copyCmd.c_str()) != 0) {
+    if(cpy(binaryPath,"/opt/fragarach/overlay/upper/target")) 
+    {
         std::cerr << "Failed to copy binary into sandbox\n";
         return false;
     }
 
-    system("chmod +x /opt/fragarach/overlay/upper/target");
-    
+    chmod("/opt/fragarach/overlay/upper/target",0755);
 
     const int STACK_SIZE=1024*1024;// 1MB stack size for the child process
     std::vector<char> childStack(STACK_SIZE);
@@ -114,7 +112,7 @@ bool Sandbox::launch()
     std::string cgroup="/sys/fs/cgroup/fragarach/";
 
     // std::cout<<getChildPID()<<"\n";
-    system(std::string("mkdir "+cgroup+std::to_string(getChildPID())).c_str());
+    mkdir(std::string(cgroup+std::to_string(getChildPID())).c_str(),0755);
 
     int fd=open((std::string(cgroup)+std::to_string(getChildPID())+"/memory.max").c_str(),O_WRONLY);
 
@@ -230,9 +228,17 @@ static int childFunction(void* arg)
         return 1;
     }
 
+
+
     if(chdir("/"))
     {
         std::cerr << "chdir to new root failed: " << strerror(errno) << "\n";
+        return 1;
+    }
+
+    if(mount("proc", "/proc", "proc", MS_NOSUID | MS_NOEXEC | MS_NODEV, nullptr))
+    {
+        std::cerr << "proc mount failed: " << strerror(errno) << "\n";
         return 1;
     }
 
@@ -262,7 +268,13 @@ static int childFunction(void* arg)
     };
 
     // replace the child process by the binary process
-    system("ls");
+    // system("ls");
+
+    cap_t caps=cap_get_proc();
+    cap_clear(caps);
+    cap_set_proc(caps);
+    cap_free(caps);
+
     execve(path,argv,envp);
 
     std::cerr<<"Failed to replace child process with target process: "<<strerror(errno)<<"\n";

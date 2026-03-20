@@ -142,6 +142,30 @@ bpf_tracer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bpf_tracer.dir/build.make CMakeFiles/bpf_tracer.dir/build
 .PHONY : bpf_tracer/fast
 
+src/helper_functions.o: src/helper_functions.cpp.o
+.PHONY : src/helper_functions.o
+
+# target to build an object file
+src/helper_functions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/helper_functions.cpp.o
+.PHONY : src/helper_functions.cpp.o
+
+src/helper_functions.i: src/helper_functions.cpp.i
+.PHONY : src/helper_functions.i
+
+# target to preprocess a source file
+src/helper_functions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/helper_functions.cpp.i
+.PHONY : src/helper_functions.cpp.i
+
+src/helper_functions.s: src/helper_functions.cpp.s
+.PHONY : src/helper_functions.s
+
+# target to generate assembly for a file
+src/helper_functions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/helper_functions.cpp.s
+.PHONY : src/helper_functions.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -248,6 +272,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... bpf_tracer"
 	@echo "... fragarach"
+	@echo "... src/helper_functions.o"
+	@echo "... src/helper_functions.i"
+	@echo "... src/helper_functions.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

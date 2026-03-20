@@ -8,47 +8,92 @@
 #include<sys/types.h>
 #include<sys/wait.h>
 #include<sys/syscall.h>
-
+#include "helper_functions.h"
 
 bool setup()
 {
     // this is where AlpineLinux rootfs lives
-    system("mkdir -p /opt/fragarach/rootfs");
+    mkdirP("/opt/fragarach/rootfs");
 
     // create overlay directories
 
     // upper- writable directory, all writes go here
-    system("mkdir -p /opt/fragarach/overlay/upper");
+    mkdirP("/opt/fragarach/overlay/upper");
 
     // work- internal bookeeping for kernel
-    system("mkdir -p /opt/fragarach/overlay/work");
+    mkdirP("/opt/fragarach/overlay/work");
 
     // merged- combined view of /upper and /rootfs
-    system("mkdir -p /opt/fragarach/overlay/merged");
+    mkdirP("/opt/fragarach/overlay/merged");
 
     // create cgroup for fragarach
-    system("mkdir -p /sys/fs/cgroup/fragarach/");
+    mkdirP("/sys/fs/cgroup/fragarach");
 
     // enable memory, cpu, and pid controllers for child cgroups
-    system("echo '+memory +cpu +pids' > /sys/fs/cgroup/cgroup.subtree_control");
-    system("echo '+memory +cpu +pids' > /sys/fs/cgroup/fragarach/cgroup.subtree_control");
+
+    int fd=open("/sys/fs/cgroup/cgroup.subtree_control",O_WRONLY);
+    
+    if(fd==-1)
+    {
+        std::cerr<<"Couldn't open /sys/fs/cgroup/cgroup.subtree_control : "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    const char* wr="+memory +cpu +pids";
+    write(fd,wr,strlen(wr));
+    close(fd);
+
+    fd=open("/sys/fs/cgroup/fragarach/cgroup.subtree_control",O_WRONLY);
+    
+    if(fd==-1)
+    {
+        std::cerr<<"Couldn't open /sys/fs/cgroup/fragarach/cgroup.subtree_control : "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    write(fd,wr,strlen(wr));
+    close(fd);
+
 
     // download AlpineLinux rootfs if it doesn't exist
     if(access("/opt/fragarach/rootfs/bin", F_OK))
     {
-        int ret = system(
-            "wget -q https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/"
-            "x86_64/alpine-minirootfs-3.18.0-x86_64.tar.gz "
-            "-O /tmp/alpine.tar.gz"
-        );
+        char* wgetArgs[] = {
+            (char*)"wget",
+            (char*)"-q",
+            (char*)"https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.0-x86_64.tar.gz",
+            (char*)"-O",
+            (char*)"/tmp/alpine.tar.gz",
+            nullptr
+        };
+
+        int ret=run("/usr/bin/wget", wgetArgs);
         
-        if (ret != 0) {
+        if (ret) 
+        {
             std::cerr << "Failed to download Alpine rootfs\n";
             return false;
         }    
+
         // save rootfs to /opt/fragarach/rootfs
-        system("tar -xzf /tmp/alpine.tar.gz -C /opt/fragarach/rootfs");
-        system("rm /tmp/alpine.tar.gz");
+        char* tarArgs[] = {
+            (char*)"tar",
+            (char*)"-xzf",
+            (char*)"/tmp/alpine.tar.gz",
+            (char*)"-C",
+            (char*)"/opt/fragarach/rootfs",
+            nullptr
+        };
+
+        ret=run("/usr/bin/tar", tarArgs);
+
+        if (ret) 
+        {
+            std::cerr << "Failed to extract files\n";
+            return false;
+        }  
+
+        unlink("/tmp/alpine.tar.gz");
     }
 
     return true;
