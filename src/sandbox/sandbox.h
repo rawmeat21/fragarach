@@ -21,7 +21,7 @@ public:
     bool launch();
     bool isRunning();
     void cleanup();
-    
+    int syncPipe[2];
 
 private:
     std::string binaryPath;
@@ -29,5 +29,6 @@ private:
     size_t memLimit=512*1024*1024;
     int pidLimit=32;
     pid_t childPID=-1;
+    
 };
 

@@ -130,10 +130,14 @@ int main(int argc,char* argv[])
     Tracer tracer{sandbox.getChildPID()};
     tracer.start();
 
+    write(sandbox.syncPipe[1],"x",1); // write to pipe, only now child will run
+    close(sandbox.syncPipe[1]);
+
     auto start=std::chrono::steady_clock::now();
 
     while (sandbox.isRunning())
     {
+        std::cout<<"Check\n";
         auto now = std::chrono::steady_clock::now();
         auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(now - start).count();
 
@@ -147,10 +151,12 @@ int main(int argc,char* argv[])
 
         usleep(1e5);
     }
+    std::cout<<"Sandbox closed\n";
 
     tracer.stop();
     sandbox.cleanup();
 
+    std::cout<<"Number of syscalls: "<<tracer.getEvents().size()<<"\n";
     for(auto& e : tracer.getEvents())
     {
         std::cout << "PID: " << e.pid << " SYSCALL: " << e.syscall_nr << " TIME: " << e.timestamp << "\n";

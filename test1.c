@@ -14,14 +14,6 @@ int main()
     } else {
         printf("The process is not running as root (EUID = %d).\n", euid);
     }
-
-    // try to reboot — requires CAP_SYS_BOOT
-    int ret = reboot(RB_AUTOBOOT);
-    
-    if(ret == -1)
-        printf("reboot failed (expected — capability dropped)\n");
-    else
-        printf("reboot succeeded (BAD — capability not dropped!), BYEEE\n");
     
     return 0;
 }

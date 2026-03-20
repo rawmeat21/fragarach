@@ -18,6 +18,12 @@
 
 static int childFunction(void*);
 
+
+const char* lower  = "/opt/fragarach/rootfs";
+const char* upper  = "/opt/fragarach/overlay/upper";
+const char* work   = "/opt/fragarach/overlay/work";
+const char* merged = "/opt/fragarach/overlay/merged";
+
 Sandbox::Sandbox(std::string_view binaryPath)
 :binaryPath(binaryPath)
 {}
@@ -84,6 +90,10 @@ bool Sandbox::launch()
 
     chmod("/opt/fragarach/overlay/upper/target",0755);
 
+    close(syncPipe[0]);
+    pipe(syncPipe);
+
+
     const int STACK_SIZE=1024*1024;// 1MB stack size for the child process
     std::vector<char> childStack(STACK_SIZE);
 
@@ -107,6 +117,42 @@ bool Sandbox::launch()
     // PID has been assigned, child process is running with childPID
     std::cout<<"Got PID: "<<childPID<<"\n";
 
+    /*
+    // set up UID and GID mappings to the child process 
+
+    int mp=open(std::string("/proc/"+std::to_string(childPID)+"/uid_map").c_str(),O_WRONLY);
+
+    if(mp==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    write(mp,"0 1000 1",8);
+    close(mp);
+
+    mp=open(std::string("/proc/"+std::to_string(childPID)+"/setgroups").c_str(),O_WRONLY);
+
+    if(mp==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    write(mp,"deny",4);
+    close(mp);
+
+    mp=open(std::string("/proc/"+std::to_string(childPID)+"/gid_map").c_str(),O_WRONLY);
+
+    if(mp==-1)
+    {
+        std::cerr<<"open failed: "<<strerror(errno)<<"\n";
+        return false;
+    }
+
+    write(mp,"0 1000 1",8);
+    close(mp);
+    */
 
     // create cgroup for this process
     std::string cgroup="/sys/fs/cgroup/fragarach/";
@@ -179,16 +225,10 @@ static int childFunction(void* arg)
     // get the original sandbox object (passed into clone() earlier in Sandbox::launch())
     Sandbox* sb=static_cast<Sandbox*>(arg);
 
-    const char* lower  = "/opt/fragarach/rootfs";
-    const char* upper  = "/opt/fragarach/overlay/upper";
-    const char* work   = "/opt/fragarach/overlay/work";
-    const char* merged = "/opt/fragarach/overlay/merged";
 
     // unmount the filesystem at merged (safety cleanup incase previous overlay crashed or something)
     // MNT_DETACH- detach from tree immediately
     umount2(merged,MNT_DETACH);
-
-
     std::string opts="lowerdir="+std::string(lower)+",upperdir="+std::string(upper)+",workdir="+std::string(work);
 
     // create an overlay filesystem
@@ -227,8 +267,6 @@ static int childFunction(void* arg)
         std::cerr<<"pivot_root failed: "<<strerror(errno)<<"\n";
         return 1;
     }
-
-
 
     if(chdir("/"))
     {
@@ -270,10 +308,16 @@ static int childFunction(void* arg)
     // replace the child process by the binary process
     // system("ls");
 
+    // drop capabilities to target, it can try to do bad things but it can't
     cap_t caps=cap_get_proc();
     cap_clear(caps);
     cap_set_proc(caps);
     cap_free(caps);
+
+    close(sb->syncPipe[1]);
+    char buf;
+    read(sb->syncPipe[0], &buf, 1); // will hang until syncPipe[0] is written to
+    close(sb->syncPipe[0]);
 
     execve(path,argv,envp);
 

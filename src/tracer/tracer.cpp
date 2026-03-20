@@ -34,6 +34,7 @@ bool Tracer::start()
     __u32 pid = targetPID;
     bpf_map__update_elem(skel->maps.target_pid, &key, sizeof(key), &pid, sizeof(pid), BPF_ANY);
 
+    std::cout<<"Tracer started with target PID: "<<targetPID<<"\n";
     // attach the tracepoint
     int err = tracer_bpf__attach(skel);
     if(err)
