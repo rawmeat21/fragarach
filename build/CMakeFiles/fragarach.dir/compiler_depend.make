@@ -260,6 +260,7 @@ CMakeFiles/fragarach.dir/src/helper_functions.cpp.o: /home/rawmeat/repositories/
 
 CMakeFiles/fragarach.dir/src/main.cpp.o: /home/rawmeat/repositories/fragarach/src/main.cpp \
   /home/rawmeat/repositories/fragarach/src/helper_functions.h \
+  /home/rawmeat/repositories/fragarach/src/json.hpp \
   /home/rawmeat/repositories/fragarach/src/sandbox/sandbox.h \
   /home/rawmeat/repositories/fragarach/src/json.hpp \
   /home/rawmeat/repositories/fragarach/src/syscall_graph/syscallGraph.h \
@@ -429,6 +430,7 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: /home/rawmeat/repositories/fragarach/sr
   /usr/include/c++/15.2.1/bits/fs_fwd.h \
   /usr/include/c++/15.2.1/bits/fs_ops.h \
   /usr/include/c++/15.2.1/bits/fs_path.h \
+  /usr/include/c++/15.2.1/bits/fstream.tcc \
   /usr/include/c++/15.2.1/bits/functexcept.h \
   /usr/include/c++/15.2.1/bits/functional_hash.h \
   /usr/include/c++/15.2.1/bits/gslice.h \
@@ -539,6 +541,7 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: /home/rawmeat/repositories/fragarach/sr
   /usr/include/c++/15.2.1/ext/type_traits.h \
   /usr/include/c++/15.2.1/filesystem \
   /usr/include/c++/15.2.1/forward_list \
+  /usr/include/c++/15.2.1/fstream \
   /usr/include/c++/15.2.1/functional \
   /usr/include/c++/15.2.1/initializer_list \
   /usr/include/c++/15.2.1/iomanip \
@@ -587,8 +590,10 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: /home/rawmeat/repositories/fragarach/sr
   /usr/include/c++/15.2.1/vector \
   /usr/include/c++/15.2.1/version \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
+  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
+  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
   /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/ctype_base.h \
@@ -1666,8 +1671,6 @@ tracer.skel.h:
 
 /usr/include/asm/ioctl.h:
 
-/usr/include/asm-generic/sockios.h:
-
 /usr/include/asm-generic/ioctl.h:
 
 /home/rawmeat/repositories/fragarach/src/sandbox/sandbox.cpp:
@@ -1675,6 +1678,12 @@ tracer.skel.h:
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h:
 
 /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/time_members.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h:
+
+/usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h:
 
 /usr/include/asm-generic/ioctls.h:
 
@@ -1707,6 +1716,8 @@ tracer.skel.h:
 /usr/include/c++/15.2.1/memory:
 
 /usr/include/c++/15.2.1/iomanip:
+
+/usr/include/c++/15.2.1/fstream:
 
 /usr/include/c++/15.2.1/locale:
 
@@ -2275,6 +2286,8 @@ CMakeFiles/fragarach.dir/src/main.cpp.o:
 /usr/include/c++/15.2.1/bits/localefwd.h:
 
 /usr/include/c++/15.2.1/bits/memory_resource.h:
+
+/usr/include/c++/15.2.1/bits/fstream.tcc:
 
 /usr/include/time.h:
 

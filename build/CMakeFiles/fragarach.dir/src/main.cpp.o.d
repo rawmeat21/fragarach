@@ -281,4 +281,9 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/bits/dirent_ext.h /usr/include/fcntl.h \
  /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
  /usr/include/bits/types/struct_iovec.h /usr/include/linux/falloc.h \
- /usr/include/linux/openat2.h /usr/include/bits/openat2.h
+ /usr/include/linux/openat2.h /usr/include/bits/openat2.h \
+ /home/rawmeat/repositories/fragarach/src/json.hpp \
+ /usr/include/c++/15.2.1/fstream \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/15.2.1/bits/fstream.tcc

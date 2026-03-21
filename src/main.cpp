@@ -9,6 +9,9 @@
 #include<sys/wait.h>
 #include<sys/syscall.h>
 #include "helper_functions.h"
+#include "json.hpp"
+#include<fstream>
+#include<filesystem>
 
 bool setup()
 {
@@ -25,6 +28,9 @@ bool setup()
 
     // merged- combined view of /upper and /rootfs
     mkdirP("/opt/fragarach/overlay/merged");
+
+    // create graphs directory
+    mkdirP("/opt/fragarach/raw");
 
     // create cgroup for fragarach
     mkdirP("/sys/fs/cgroup/fragarach");
@@ -58,6 +64,10 @@ bool setup()
     // download AlpineLinux rootfs if it doesn't exist
     if(access("/opt/fragarach/rootfs/bin", F_OK))
     {
+        // return value !=0 ==> file doesnt exist
+
+        std::cout<<"Creating new rootfs...\n";
+
         char* wgetArgs[] = {
             (char*)"wget",
             (char*)"-q",
@@ -101,10 +111,17 @@ bool setup()
 
 int main(int argc,char* argv[])
 {
+    int label=-1;// indicates if current binary is malware
+
     if(argc<2)
     {
         std::cerr<<"Binary path not provided.\n";
         return 1;
+    }
+
+    if(argc>=3)
+    {
+        label=std::stoi(argv[2]);
     }
 
     if(!setup())
@@ -173,11 +190,34 @@ int main(int argc,char* argv[])
     SyscallGraph sg{};
 
     sg.build(tracer.getEvents());
-
     COOGraph cg=sg.cooExport();
+    cg.label=label;    
 
-    // for(int i=0;i<cg.from.size();++i)
-    // {
-    //     std::cout<<cg.from[i]<<' '<<cg.to[i]<<' '<<cg.weights[i]<<"\n";
-    // }
+    if(cg.label==-1)
+    {
+        std::cout<<"Inference mode\n";
+    }
+    else
+    {
+        std::cout<<"Testing mode\n";
+        std::cout<<"The malware has been tested\n";
+
+        std::string binaryName=std::filesystem::path(binaryPath).filename();
+
+        std::string jsonfile="/opt/fragarach/raw/"+binaryName+".json";
+
+        std::ofstream outfile(jsonfile);
+
+        if(!outfile.is_open())
+        {
+            std::cerr<<"Failed to open file\n";
+            return 1;
+        }
+
+        json data=cg.tojson();
+
+        outfile<<data;
+        outfile.close();
+    }
+
 }
