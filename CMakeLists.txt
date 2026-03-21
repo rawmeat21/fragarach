@@ -1,12 +1,19 @@
 cmake_minimum_required(VERSION 3.15)
+
 project(fragarach)
 
 
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_PREFIX_PATH "/opt/libtorch")
 
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(SECCOMP REQUIRED IMPORTED_TARGET libseccomp)
+find_package(Torch REQUIRED)
+
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TORCH_CXX_FLAGS}")
+
 
 add_executable(fragarach
     src/main.cpp
@@ -36,6 +43,6 @@ add_custom_target(bpf_tracer
 
 add_dependencies(fragarach bpf_tracer)
 
-target_include_directories(fragarach PRIVATE src ${CMAKE_CURRENT_BINARY_DIR})
-target_link_libraries(fragarach PRIVATE bpf elf z cap PkgConfig::SECCOMP)
+target_include_directories(fragarach PRIVATE src ${CMAKE_CURRENT_BINARY_DIR} ${TORCH_INCLUDE_DIRS})
+target_link_libraries(fragarach PRIVATE bpf elf z cap PkgConfig::SECCOMP ${TORCH_LIBRARIES})
 

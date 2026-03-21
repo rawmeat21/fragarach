@@ -23,6 +23,7 @@ class SyscallDataset(InMemoryDataset):
     def process(self):
         graphs = []
         for filename in self.raw_file_names:
+            if not filename.endswith(".json"): continue
             with open(f"/opt/fragarach/raw/{filename}") as f:
                 raw = json.load(f)
                 edge_index = torch.tensor([raw["from"], raw["to"]], dtype=torch.long)
@@ -80,7 +81,9 @@ test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
 criterion = nn.CrossEntropyLoss()
 
-model = MalwareGNN()
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+model = MalwareGNN().to(device)
+
 optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
 
 
@@ -90,6 +93,7 @@ def evaluate(model, loader):
     total = 0
     with torch.no_grad():
         for batch in loader:
+            batch = batch.to(device)
             out = model(batch)
             pred = out.argmax(dim=1) 
             correct += (pred == batch.y.squeeze()).sum().item()
@@ -102,6 +106,7 @@ for epoch in range(100):
     # each batch has 32 graphs
     total_loss = 0
     for batch in train_loader:
+        batch=batch.to(device)
         # clear previous gradients
         optimizer.zero_grad()   
         # forward pass
@@ -117,3 +122,7 @@ for epoch in range(100):
 
 
 torch.save(model.state_dict(), "/opt/fragarach/model.pt")
+
+model.eval()
+scripted = torch.jit.script(model)
+scripted.save("/opt/fragarach/model_scripted.pt")

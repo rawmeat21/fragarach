@@ -11,7 +11,13 @@ fragarach: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libelf.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libz.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libcap.so \
+  /opt/libtorch/lib/libtorch.so \
+  /opt/libtorch/lib/libc10.so \
+  /opt/libtorch/lib/libkineto.a \
   /usr/lib/libseccomp.so \
+  /opt/libtorch/lib/libtorch_cpu.so \
+  /opt/libtorch/lib/libc10.so \
+  /opt/libtorch/lib/libtorch.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libm.so \
@@ -40,7 +46,15 @@ fragarach: \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/crtn.o \
   /usr/lib/ld-linux-x86-64.so.2 \
   /usr/lib32/libzstd.so.1 \
-  /usr/lib/libzstd.so.1
+  /usr/lib/libzstd.so.1 \
+  /usr/lib32/libdl.so.2 \
+  /usr/lib/libdl.so.2 \
+  /usr/lib/libm.so.6 \
+  /usr/lib32/libpthread.so.0 \
+  /usr/lib/libpthread.so.0 \
+  /usr/lib32/librt.so.1 \
+  /usr/lib/librt.so.1 \
+  /opt/libtorch/lib/libgomp-98b21ff3.so.1
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/Scrt1.o:
 
@@ -66,7 +80,19 @@ CMakeFiles/fragarach.dir/src/helper_functions.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libcap.so:
 
+/opt/libtorch/lib/libtorch.so:
+
+/opt/libtorch/lib/libc10.so:
+
+/opt/libtorch/lib/libkineto.a:
+
 /usr/lib/libseccomp.so:
+
+/opt/libtorch/lib/libtorch_cpu.so:
+
+/opt/libtorch/lib/libc10.so:
+
+/opt/libtorch/lib/libtorch.so:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libstdc++.so:
 
@@ -125,3 +151,19 @@ CMakeFiles/fragarach.dir/src/helper_functions.cpp.o:
 /usr/lib32/libzstd.so.1:
 
 /usr/lib/libzstd.so.1:
+
+/usr/lib32/libdl.so.2:
+
+/usr/lib/libdl.so.2:
+
+/usr/lib/libm.so.6:
+
+/usr/lib32/libpthread.so.0:
+
+/usr/lib/libpthread.so.0:
+
+/usr/lib32/librt.so.1:
+
+/usr/lib/librt.so.1:
+
+/opt/libtorch/lib/libgomp-98b21ff3.so.1:

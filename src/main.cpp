@@ -15,7 +15,6 @@
 
 bool setup()
 {
-    // this is where AlpineLinux rootfs lives
     mkdirP("/opt/fragarach/rootfs");
 
     // create overlay directories
@@ -60,50 +59,10 @@ bool setup()
     write(fd,wr,strlen(wr));
     close(fd);
 
-
-    // download AlpineLinux rootfs if it doesn't exist
     if(access("/opt/fragarach/rootfs/bin", F_OK))
     {
-        // return value !=0 ==> file doesnt exist
-
-        std::cout<<"Creating new rootfs...\n";
-
-        char* wgetArgs[] = {
-            (char*)"wget",
-            (char*)"-q",
-            (char*)"https://dl-cdn.alpinelinux.org/alpine/v3.18/releases/x86_64/alpine-minirootfs-3.18.0-x86_64.tar.gz",
-            (char*)"-O",
-            (char*)"/tmp/alpine.tar.gz",
-            nullptr
-        };
-
-        int ret=run("/usr/bin/wget", wgetArgs);
-        
-        if (ret) 
-        {
-            std::cerr << "Failed to download Alpine rootfs\n";
-            return false;
-        }    
-
-        // save rootfs to /opt/fragarach/rootfs
-        char* tarArgs[] = {
-            (char*)"tar",
-            (char*)"-xzf",
-            (char*)"/tmp/alpine.tar.gz",
-            (char*)"-C",
-            (char*)"/opt/fragarach/rootfs",
-            nullptr
-        };
-
-        ret=run("/usr/bin/tar", tarArgs);
-
-        if (ret) 
-        {
-            std::cerr << "Failed to extract files\n";
-            return false;
-        }  
-
-        unlink("/tmp/alpine.tar.gz");
+        std::cerr<<"Please install a proper filesystem in /opt/fragarach/rootfs/\n";
+        return false;
     }
 
     return true;
