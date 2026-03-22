@@ -9,12 +9,12 @@ using json=nlohmann::json;
 
 struct COOGraph
 {
-    std::vector<uint32_t> from;
-    std::vector<uint32_t> to;
-    std::vector<uint32_t> weights;
+    std::vector<int> from;
+    std::vector<int> to;
+    std::vector<int> weights;
 
-    std::vector<uint32_t> nodes;// nodes[i]= the syscall which vertex i maps to
-    std::vector<uint8_t> blocked;// blocked[i]= whether nodes[i] was blocked
+    std::vector<int> nodes;// nodes[i]= the syscall which vertex i maps to
+    std::vector<int> blocked;// blocked[i]= whether nodes[i] was blocked
     
     int label=-1;
     json tojson()

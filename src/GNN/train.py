@@ -47,19 +47,19 @@ class MalwareGNN(nn.Module):
         self.classifier = nn.Linear(64, 2)
         self.dropout = nn.Dropout(p=0.5)
 
-    def forward(self, data):
-        sysc_embedded = self.embedding(data.sysc)
-        x = torch.cat([sysc_embedded, data.blocked], dim=1)
+    def forward(self, edge_index, edge_attr, sysc, blocked, batch):
+        sysc_embedded = self.embedding(sysc)
+        x = torch.cat([sysc_embedded, blocked], dim=1)
         
-        x = self.conv1(x, data.edge_index)
+        x = self.conv1(x, edge_index, edge_attr.squeeze(1))
         x = F.relu(x)
         x = self.dropout(x)
 
-        x = self.conv2(x, data.edge_index)
+        x = self.conv2(x, edge_index, edge_attr.squeeze(1))
         x = F.relu(x)
         x = self.dropout(x)
         
-        x = global_mean_pool(x, data.batch)
+        x = global_mean_pool(x, batch)
         
         x = self.classifier(x)
         return x
@@ -94,7 +94,7 @@ def evaluate(model, loader):
     with torch.no_grad():
         for batch in loader:
             batch = batch.to(device)
-            out = model(batch)
+            out = model(batch.edge_index, batch.edge_attr, batch.sysc, batch.blocked, batch.batch)
             pred = out.argmax(dim=1) 
             correct += (pred == batch.y.squeeze()).sum().item()
             total += len(batch.y)
@@ -110,7 +110,7 @@ for epoch in range(100):
         # clear previous gradients
         optimizer.zero_grad()   
         # forward pass
-        out = model(batch)      
+        out = model(batch.edge_index, batch.edge_attr, batch.sysc, batch.blocked, batch.batch)      
 
         loss = criterion(out, batch.y.squeeze())
         loss.backward()

@@ -12,6 +12,8 @@
 #include "json.hpp"
 #include<fstream>
 #include<filesystem>
+#include "inference/inference.h"
+#include<utility>
 
 bool setup()
 {
@@ -155,6 +157,16 @@ int main(int argc,char* argv[])
     if(cg.label==-1)
     {
         std::cout<<"Inference mode\n";
+
+        Inference inf("/opt/fragarach/model_scripted.pt");
+
+        auto ans=inf.predict(cg);
+
+        if(ans.first==0) std::cout<<"Verdict: BENIGN ";
+        else std::cout<<"Verdict: MALICIOUS ";
+
+        std::cout<<"\nConfidence Score: ";
+        std::cout<<ans.second<<"\n";
     }
     else
     {

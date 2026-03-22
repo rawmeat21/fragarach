@@ -21,6 +21,7 @@ add_executable(fragarach
     src/tracer/tracer.cpp
     src/syscall_graph/syscallGraph.cpp
     src/helper_functions.cpp
+    src/inference/inference.cpp
 )
 
 
