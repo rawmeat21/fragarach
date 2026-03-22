@@ -7,6 +7,7 @@ fragarach: \
   CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o \
   CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.o \
   CMakeFiles/fragarach.dir/src/helper_functions.cpp.o \
+  CMakeFiles/fragarach.dir/src/inference/inference.cpp.o \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libbpf.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libelf.so \
   /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libz.so \
@@ -71,6 +72,8 @@ CMakeFiles/fragarach.dir/src/tracer/tracer.cpp.o:
 CMakeFiles/fragarach.dir/src/syscall_graph/syscallGraph.cpp.o:
 
 CMakeFiles/fragarach.dir/src/helper_functions.cpp.o:
+
+CMakeFiles/fragarach.dir/src/inference/inference.cpp.o:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/../../../../lib/libbpf.so:
 

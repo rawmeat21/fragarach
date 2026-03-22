@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/fragarach.dir/link.d"
   "CMakeFiles/fragarach.dir/src/helper_functions.cpp.o"
   "CMakeFiles/fragarach.dir/src/helper_functions.cpp.o.d"
+  "CMakeFiles/fragarach.dir/src/inference/inference.cpp.o"
+  "CMakeFiles/fragarach.dir/src/inference/inference.cpp.o.d"
   "CMakeFiles/fragarach.dir/src/main.cpp.o"
   "CMakeFiles/fragarach.dir/src/main.cpp.o.d"
   "CMakeFiles/fragarach.dir/src/sandbox/sandbox.cpp.o"

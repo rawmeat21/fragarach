@@ -1,7 +1,8 @@
-CMakeFiles/fragarach.dir/src/main.cpp.o: \
- /home/rawmeat/repositories/fragarach/src/main.cpp \
- /usr/include/stdc-predef.h /usr/include/c++/15.2.1/iostream \
- /usr/include/c++/15.2.1/bits/requires_hosted.h \
+CMakeFiles/fragarach.dir/src/inference/inference.cpp.o: \
+ /home/rawmeat/repositories/fragarach/src/inference/inference.cpp \
+ /usr/include/stdc-predef.h \
+ /home/rawmeat/repositories/fragarach/src/inference/inference.h \
+ /usr/include/c++/15.2.1/utility \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/os_defines.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -10,44 +11,91 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/cpu_defines.h \
  /usr/include/c++/15.2.1/pstl/pstl_config.h \
- /usr/include/c++/15.2.1/ostream /usr/include/c++/15.2.1/bits/ostream.h \
- /usr/include/c++/15.2.1/ios /usr/include/c++/15.2.1/iosfwd \
- /usr/include/c++/15.2.1/bits/stringfwd.h \
- /usr/include/c++/15.2.1/bits/memoryfwd.h \
- /usr/include/c++/15.2.1/bits/postypes.h /usr/include/c++/15.2.1/cwchar \
- /usr/include/wchar.h /usr/include/bits/libc-header-start.h \
- /usr/include/bits/floatn.h /usr/include/bits/floatn-common.h \
+ /usr/include/c++/15.2.1/bits/stl_relops.h \
+ /usr/include/c++/15.2.1/bits/stl_pair.h \
+ /usr/include/c++/15.2.1/type_traits \
+ /usr/include/c++/15.2.1/bits/version.h \
+ /usr/include/c++/15.2.1/bits/move.h \
+ /usr/include/c++/15.2.1/bits/utility.h \
+ /usr/include/c++/15.2.1/initializer_list \
+ /opt/libtorch/include/torch/script.h \
+ /opt/libtorch/include/torch/csrc/api/include/torch/types.h \
+ /opt/libtorch/include/ATen/ATen.h /opt/libtorch/include/ATen/Context.h \
+ /opt/libtorch/include/ATen/BlasBackend.h \
+ /opt/libtorch/include/c10/util/Exception.h \
+ /opt/libtorch/include/c10/macros/Export.h \
+ /opt/libtorch/include/torch/headeronly/macros/Export.h \
+ /opt/libtorch/include/torch/headeronly/macros/cmake_macros.h \
+ /opt/libtorch/include/c10/macros/Macros.h \
+ /opt/libtorch/include/torch/headeronly/macros/Macros.h \
+ /usr/include/c++/15.2.1/cassert /usr/include/assert.h \
+ /usr/include/c++/15.2.1/cstdint \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/libc-header-start.h \
+ /usr/include/bits/types.h /usr/include/bits/typesizes.h \
+ /usr/include/bits/time64.h /usr/include/bits/wchar.h \
+ /usr/include/bits/stdint-intn.h /usr/include/bits/stdint-uintn.h \
+ /usr/include/bits/stdint-least.h \
+ /opt/libtorch/include/c10/util/Backtrace.h \
+ /usr/include/c++/15.2.1/cstddef \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stddef.h \
+ /usr/include/c++/15.2.1/memory /usr/include/c++/15.2.1/bits/memoryfwd.h \
+ /usr/include/c++/15.2.1/bits/allocator.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
+ /usr/include/c++/15.2.1/bits/new_allocator.h /usr/include/c++/15.2.1/new \
+ /usr/include/c++/15.2.1/bits/exception.h \
+ /usr/include/c++/15.2.1/bits/functexcept.h \
+ /usr/include/c++/15.2.1/bits/exception_defines.h \
+ /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
+ /usr/include/c++/15.2.1/bits/stl_construct.h \
+ /usr/include/c++/15.2.1/bits/stl_iterator_base_types.h \
+ /usr/include/c++/15.2.1/bits/stl_iterator_base_funcs.h \
+ /usr/include/c++/15.2.1/bits/concept_check.h \
+ /usr/include/c++/15.2.1/debug/assertions.h \
+ /usr/include/c++/15.2.1/ext/numeric_traits.h \
+ /usr/include/c++/15.2.1/bits/cpp_type_traits.h \
+ /usr/include/c++/15.2.1/ext/type_traits.h \
+ /usr/include/c++/15.2.1/bits/stl_uninitialized.h \
+ /usr/include/c++/15.2.1/bits/ptr_traits.h \
+ /usr/include/c++/15.2.1/bits/stl_algobase.h \
+ /usr/include/c++/15.2.1/bits/stl_iterator.h \
+ /usr/include/c++/15.2.1/debug/debug.h \
+ /usr/include/c++/15.2.1/bits/predefined_ops.h \
+ /usr/include/c++/15.2.1/bit /usr/include/c++/15.2.1/concepts \
+ /usr/include/c++/15.2.1/ext/alloc_traits.h \
+ /usr/include/c++/15.2.1/bits/alloc_traits.h \
+ /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/15.2.1/bits/align.h \
+ /usr/include/c++/15.2.1/bits/uses_allocator.h \
+ /usr/include/c++/15.2.1/bits/unique_ptr.h /usr/include/c++/15.2.1/tuple \
+ /usr/include/c++/15.2.1/bits/invoke.h \
+ /usr/include/c++/15.2.1/bits/stl_function.h \
+ /usr/include/c++/15.2.1/backward/binders.h \
+ /usr/include/c++/15.2.1/bits/functional_hash.h \
+ /usr/include/c++/15.2.1/bits/hash_bytes.h \
+ /usr/include/c++/15.2.1/bits/shared_ptr.h /usr/include/c++/15.2.1/iosfwd \
+ /usr/include/c++/15.2.1/bits/requires_hosted.h \
+ /usr/include/c++/15.2.1/bits/stringfwd.h \
+ /usr/include/c++/15.2.1/bits/postypes.h /usr/include/c++/15.2.1/cwchar \
+ /usr/include/wchar.h /usr/include/bits/floatn.h \
+ /usr/include/bits/floatn-common.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdarg.h \
- /usr/include/bits/wchar.h /usr/include/bits/types/wint_t.h \
- /usr/include/bits/types/mbstate_t.h \
+ /usr/include/bits/types/wint_t.h /usr/include/bits/types/mbstate_t.h \
  /usr/include/bits/types/__mbstate_t.h /usr/include/bits/types/__FILE.h \
  /usr/include/bits/types/FILE.h /usr/include/bits/types/locale_t.h \
- /usr/include/bits/types/__locale_t.h /usr/include/c++/15.2.1/exception \
- /usr/include/c++/15.2.1/bits/exception.h \
- /usr/include/c++/15.2.1/bits/version.h \
- /usr/include/c++/15.2.1/bits/exception_ptr.h \
- /usr/include/c++/15.2.1/bits/exception_defines.h \
- /usr/include/c++/15.2.1/bits/cxxabi_init_exception.h \
+ /usr/include/bits/types/__locale_t.h \
+ /usr/include/c++/15.2.1/bits/shared_ptr_base.h \
  /usr/include/c++/15.2.1/typeinfo \
- /usr/include/c++/15.2.1/bits/hash_bytes.h /usr/include/c++/15.2.1/new \
- /usr/include/c++/15.2.1/bits/move.h /usr/include/c++/15.2.1/type_traits \
- /usr/include/c++/15.2.1/bits/nested_exception.h \
- /usr/include/c++/15.2.1/bits/char_traits.h \
- /usr/include/c++/15.2.1/bits/localefwd.h \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
- /usr/include/c++/15.2.1/clocale /usr/include/locale.h \
- /usr/include/bits/locale.h /usr/include/c++/15.2.1/cctype \
- /usr/include/ctype.h /usr/include/bits/types.h \
- /usr/include/bits/typesizes.h /usr/include/bits/time64.h \
- /usr/include/bits/endian.h /usr/include/bits/endianness.h \
- /usr/include/c++/15.2.1/bits/ios_base.h \
+ /usr/include/c++/15.2.1/bits/allocated_ptr.h \
+ /usr/include/c++/15.2.1/bits/refwrap.h \
+ /usr/include/c++/15.2.1/ext/aligned_buffer.h \
  /usr/include/c++/15.2.1/ext/atomicity.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/gthr.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/gthr-default.h \
  /usr/include/pthread.h /usr/include/sched.h \
  /usr/include/bits/types/time_t.h \
- /usr/include/bits/types/struct_timespec.h /usr/include/bits/sched.h \
+ /usr/include/bits/types/struct_timespec.h /usr/include/bits/endian.h \
+ /usr/include/bits/endianness.h /usr/include/bits/sched.h \
  /usr/include/linux/sched/types.h /usr/include/linux/types.h \
  /usr/include/asm/types.h /usr/include/asm-generic/types.h \
  /usr/include/asm-generic/int-ll64.h /usr/include/asm/bitsperlong.h \
@@ -69,52 +117,39 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/bits/pthread_stack_min-dynamic.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/atomic_word.h \
  /usr/include/sys/single_threaded.h \
- /usr/include/c++/15.2.1/bits/locale_classes.h \
- /usr/include/c++/15.2.1/string /usr/include/c++/15.2.1/bits/allocator.h \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++allocator.h \
- /usr/include/c++/15.2.1/bits/new_allocator.h \
- /usr/include/c++/15.2.1/bits/functexcept.h \
- /usr/include/c++/15.2.1/bits/cpp_type_traits.h \
- /usr/include/c++/15.2.1/bits/ostream_insert.h \
+ /usr/include/c++/15.2.1/ext/concurrence.h \
+ /usr/include/c++/15.2.1/exception \
+ /usr/include/c++/15.2.1/bits/exception_ptr.h \
+ /usr/include/c++/15.2.1/bits/cxxabi_init_exception.h \
+ /usr/include/c++/15.2.1/bits/nested_exception.h \
+ /usr/include/c++/15.2.1/bits/shared_ptr_atomic.h \
+ /usr/include/c++/15.2.1/bits/atomic_base.h \
+ /usr/include/c++/15.2.1/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/15.2.1/backward/auto_ptr.h \
+ /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
+ /usr/include/c++/15.2.1/pstl/execution_defs.h \
+ /usr/include/c++/15.2.1/string \
+ /usr/include/c++/15.2.1/bits/char_traits.h \
+ /usr/include/c++/15.2.1/bits/localefwd.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++locale.h \
+ /usr/include/c++/15.2.1/clocale /usr/include/locale.h \
+ /usr/include/bits/locale.h /usr/include/c++/15.2.1/cctype \
+ /usr/include/ctype.h /usr/include/c++/15.2.1/bits/ostream_insert.h \
  /usr/include/c++/15.2.1/bits/cxxabi_forced.h \
- /usr/include/c++/15.2.1/bits/stl_iterator_base_funcs.h \
- /usr/include/c++/15.2.1/bits/concept_check.h \
- /usr/include/c++/15.2.1/debug/assertions.h \
- /usr/include/c++/15.2.1/bits/stl_iterator_base_types.h \
- /usr/include/c++/15.2.1/bits/stl_iterator.h \
- /usr/include/c++/15.2.1/ext/type_traits.h \
- /usr/include/c++/15.2.1/bits/ptr_traits.h \
- /usr/include/c++/15.2.1/bits/stl_function.h \
- /usr/include/c++/15.2.1/backward/binders.h \
- /usr/include/c++/15.2.1/ext/numeric_traits.h \
- /usr/include/c++/15.2.1/bits/stl_algobase.h \
- /usr/include/c++/15.2.1/bits/stl_pair.h \
- /usr/include/c++/15.2.1/bits/utility.h \
- /usr/include/c++/15.2.1/debug/debug.h \
- /usr/include/c++/15.2.1/bits/predefined_ops.h \
- /usr/include/c++/15.2.1/bit /usr/include/c++/15.2.1/concepts \
- /usr/include/c++/15.2.1/bits/refwrap.h \
- /usr/include/c++/15.2.1/bits/invoke.h \
  /usr/include/c++/15.2.1/bits/range_access.h \
- /usr/include/c++/15.2.1/initializer_list \
  /usr/include/c++/15.2.1/bits/basic_string.h \
- /usr/include/c++/15.2.1/ext/alloc_traits.h \
- /usr/include/c++/15.2.1/bits/alloc_traits.h \
- /usr/include/c++/15.2.1/bits/stl_construct.h \
  /usr/include/c++/15.2.1/string_view \
- /usr/include/c++/15.2.1/bits/functional_hash.h \
  /usr/include/c++/15.2.1/bits/string_view.tcc \
  /usr/include/c++/15.2.1/ext/string_conversions.h \
  /usr/include/c++/15.2.1/cstdlib /usr/include/stdlib.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \
- /usr/include/sys/types.h /usr/include/bits/stdint-intn.h \
- /usr/include/endian.h /usr/include/bits/byteswap.h \
- /usr/include/bits/uintn-identity.h /usr/include/sys/select.h \
- /usr/include/bits/select.h /usr/include/bits/types/sigset_t.h \
- /usr/include/alloca.h /usr/include/bits/stdlib-float.h \
- /usr/include/c++/15.2.1/bits/std_abs.h /usr/include/c++/15.2.1/cstdio \
- /usr/include/stdio.h /usr/include/bits/types/__fpos_t.h \
- /usr/include/bits/types/__fpos64_t.h \
+ /usr/include/sys/types.h /usr/include/endian.h \
+ /usr/include/bits/byteswap.h /usr/include/bits/uintn-identity.h \
+ /usr/include/sys/select.h /usr/include/bits/select.h \
+ /usr/include/bits/types/sigset_t.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib-float.h /usr/include/c++/15.2.1/bits/std_abs.h \
+ /usr/include/c++/15.2.1/cstdio /usr/include/stdio.h \
+ /usr/include/bits/types/__fpos_t.h /usr/include/bits/types/__fpos64_t.h \
  /usr/include/bits/types/struct_FILE.h \
  /usr/include/bits/types/cookie_io_functions_t.h \
  /usr/include/bits/stdio_lim.h /usr/include/c++/15.2.1/cerrno \
@@ -125,10 +160,15 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/c++/15.2.1/bits/charconv.h \
  /usr/include/c++/15.2.1/bits/basic_string.tcc \
  /usr/include/c++/15.2.1/bits/memory_resource.h \
- /usr/include/c++/15.2.1/cstddef \
- /usr/include/c++/15.2.1/bits/uses_allocator.h \
  /usr/include/c++/15.2.1/bits/uses_allocator_args.h \
- /usr/include/c++/15.2.1/tuple \
+ /opt/libtorch/include/c10/util/Lazy.h /usr/include/c++/15.2.1/atomic \
+ /opt/libtorch/include/c10/util/StringUtil.h \
+ /opt/libtorch/include/c10/util/string_utils.h \
+ /usr/include/c++/15.2.1/optional \
+ /usr/include/c++/15.2.1/bits/enable_special_members.h \
+ /usr/include/c++/15.2.1/ostream /usr/include/c++/15.2.1/bits/ostream.h \
+ /usr/include/c++/15.2.1/ios /usr/include/c++/15.2.1/bits/ios_base.h \
+ /usr/include/c++/15.2.1/bits/locale_classes.h \
  /usr/include/c++/15.2.1/bits/locale_classes.tcc \
  /usr/include/c++/15.2.1/system_error \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/error_constants.h \
@@ -143,75 +183,68 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/ctype_inline.h \
  /usr/include/c++/15.2.1/bits/locale_facets.tcc \
  /usr/include/c++/15.2.1/bits/basic_ios.tcc \
- /usr/include/c++/15.2.1/bits/ostream.tcc /usr/include/c++/15.2.1/istream \
- /usr/include/c++/15.2.1/bits/istream.tcc /usr/include/unistd.h \
- /usr/include/bits/posix_opt.h /usr/include/bits/environments.h \
- /usr/include/bits/confname.h /usr/include/bits/getopt_posix.h \
- /usr/include/bits/getopt_core.h /usr/include/bits/unistd_ext.h \
- /usr/include/linux/close_range.h \
- /home/rawmeat/repositories/fragarach/src/sandbox/sandbox.h \
- /home/rawmeat/repositories/fragarach/src/tracer/tracer.h \
- /usr/include/c++/15.2.1/vector \
- /usr/include/c++/15.2.1/bits/stl_uninitialized.h \
+ /usr/include/c++/15.2.1/bits/ostream.tcc /usr/include/c++/15.2.1/sstream \
+ /usr/include/c++/15.2.1/istream /usr/include/c++/15.2.1/bits/istream.tcc \
+ /usr/include/c++/15.2.1/bits/sstream.tcc /usr/include/c++/15.2.1/vector \
  /usr/include/c++/15.2.1/bits/stl_vector.h \
  /usr/include/c++/15.2.1/bits/stl_bvector.h \
- /usr/include/c++/15.2.1/bits/vector.tcc \
- /home/rawmeat/repositories/fragarach/src/tracer/../ebpf/event.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/stdint.h \
- /usr/include/stdint.h /usr/include/bits/stdint-uintn.h \
- /usr/include/bits/stdint-least.h \
- /home/rawmeat/repositories/fragarach/src/syscall_graph/syscallGraph.h \
- /usr/include/c++/15.2.1/map /usr/include/c++/15.2.1/bits/stl_tree.h \
- /usr/include/c++/15.2.1/ext/aligned_buffer.h \
- /usr/include/c++/15.2.1/bits/node_handle.h \
- /usr/include/c++/15.2.1/bits/stl_map.h \
- /usr/include/c++/15.2.1/bits/stl_multimap.h \
- /usr/include/c++/15.2.1/bits/erase_if.h /usr/include/c++/15.2.1/utility \
- /usr/include/c++/15.2.1/bits/stl_relops.h \
- /home/rawmeat/repositories/fragarach/src/syscall_graph/../json.hpp \
- /usr/include/c++/15.2.1/algorithm \
- /usr/include/c++/15.2.1/bits/stl_algo.h \
- /usr/include/c++/15.2.1/bits/algorithmfwd.h \
- /usr/include/c++/15.2.1/bits/stl_heap.h \
- /usr/include/c++/15.2.1/bits/uniform_int_dist.h \
- /usr/include/c++/15.2.1/bits/stl_tempbuf.h \
- /usr/include/c++/15.2.1/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15.2.1/pstl/execution_defs.h \
+ /usr/include/c++/15.2.1/bits/vector.tcc /usr/include/c++/15.2.1/variant \
+ /usr/include/c++/15.2.1/bits/monostate.h \
+ /usr/include/c++/15.2.1/bits/parse_numbers.h \
+ /opt/libtorch/include/torch/headeronly/util/Exception.h \
+ /opt/libtorch/include/ATen/CPUGeneratorImpl.h \
+ /opt/libtorch/include/ATen/core/Generator.h \
+ /usr/include/c++/15.2.1/deque /usr/include/c++/15.2.1/bits/stl_deque.h \
+ /usr/include/c++/15.2.1/bits/deque.tcc /usr/include/c++/15.2.1/mutex \
+ /usr/include/c++/15.2.1/bits/chrono.h /usr/include/c++/15.2.1/ratio \
+ /usr/include/c++/15.2.1/limits /usr/include/c++/15.2.1/ctime \
+ /usr/include/c++/15.2.1/bits/std_mutex.h \
+ /usr/include/c++/15.2.1/bits/unique_lock.h \
+ /opt/libtorch/include/c10/util/intrusive_ptr.h \
+ /opt/libtorch/include/c10/util/MaybeOwned.h \
+ /usr/include/c++/15.2.1/climits \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/limits.h \
+ /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h \
+ /usr/include/limits.h /usr/include/bits/posix1_lim.h \
+ /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/bits/posix2_lim.h /usr/include/bits/xopen_lim.h \
+ /usr/include/bits/uio_lim.h /opt/libtorch/include/c10/core/Device.h \
+ /opt/libtorch/include/c10/core/DeviceType.h \
+ /opt/libtorch/include/torch/headeronly/core/DeviceType.h \
  /usr/include/c++/15.2.1/functional \
  /usr/include/c++/15.2.1/bits/std_function.h \
  /usr/include/c++/15.2.1/unordered_map \
  /usr/include/c++/15.2.1/bits/unordered_map.h \
  /usr/include/c++/15.2.1/bits/hashtable.h \
  /usr/include/c++/15.2.1/bits/hashtable_policy.h \
- /usr/include/c++/15.2.1/bits/enable_special_members.h \
- /usr/include/c++/15.2.1/array /usr/include/c++/15.2.1/compare \
- /usr/include/c++/15.2.1/iterator \
- /usr/include/c++/15.2.1/bits/stream_iterator.h \
- /usr/include/c++/15.2.1/memory \
- /usr/include/c++/15.2.1/bits/stl_raw_storage_iter.h \
- /usr/include/c++/15.2.1/bits/align.h \
- /usr/include/c++/15.2.1/bits/unique_ptr.h \
- /usr/include/c++/15.2.1/bits/shared_ptr.h \
- /usr/include/c++/15.2.1/bits/shared_ptr_base.h \
- /usr/include/c++/15.2.1/bits/allocated_ptr.h \
- /usr/include/c++/15.2.1/ext/concurrence.h \
- /usr/include/c++/15.2.1/bits/shared_ptr_atomic.h \
- /usr/include/c++/15.2.1/bits/atomic_base.h \
- /usr/include/c++/15.2.1/bits/atomic_lockfree_defines.h \
- /usr/include/c++/15.2.1/backward/auto_ptr.h \
- /usr/include/c++/15.2.1/pstl/glue_memory_defs.h \
- /usr/include/c++/15.2.1/forward_list \
- /usr/include/c++/15.2.1/bits/forward_list.h \
- /usr/include/c++/15.2.1/bits/forward_list.tcc \
- /usr/include/c++/15.2.1/valarray /usr/include/c++/15.2.1/cmath \
- /usr/include/math.h /usr/include/bits/math-vector.h \
- /usr/include/bits/libm-simd-decl-stubs.h \
+ /usr/include/c++/15.2.1/bits/node_handle.h \
+ /usr/include/c++/15.2.1/bits/erase_if.h /usr/include/c++/15.2.1/array \
+ /usr/include/c++/15.2.1/compare \
+ /opt/libtorch/include/c10/core/DispatchKeySet.h \
+ /opt/libtorch/include/c10/core/DispatchKey.h \
+ /opt/libtorch/include/c10/util/Metaprogramming.h \
+ /opt/libtorch/include/torch/headeronly/util/Metaprogramming.h \
+ /opt/libtorch/include/torch/headeronly/util/TypeList.h \
+ /opt/libtorch/include/torch/headeronly/util/TypeTraits.h \
+ /usr/include/c++/15.2.1/algorithm \
+ /usr/include/c++/15.2.1/bits/stl_algo.h \
+ /usr/include/c++/15.2.1/bits/algorithmfwd.h \
+ /usr/include/c++/15.2.1/bits/stl_heap.h \
+ /usr/include/c++/15.2.1/bits/uniform_int_dist.h \
+ /usr/include/c++/15.2.1/pstl/glue_algorithm_defs.h \
+ /opt/libtorch/include/c10/util/TypeList.h \
+ /opt/libtorch/include/c10/util/llvmMathExtras.h \
+ /opt/libtorch/include/c10/util/bit_cast.h \
+ /opt/libtorch/include/torch/headeronly/util/bit_cast.h \
+ /usr/include/c++/15.2.1/cstring /usr/include/string.h \
+ /usr/include/strings.h /usr/include/c++/15.2.1/cmath /usr/include/math.h \
+ /usr/include/bits/math-vector.h /usr/include/bits/libm-simd-decl-stubs.h \
  /usr/include/bits/flt-eval-method.h /usr/include/bits/fp-logb.h \
  /usr/include/bits/fp-fast.h /usr/include/bits/mathcalls-macros.h \
  /usr/include/bits/mathcalls-helper-functions.h \
  /usr/include/bits/mathcalls.h /usr/include/bits/mathcalls-narrow.h \
  /usr/include/bits/iscanonical.h /usr/include/c++/15.2.1/bits/specfun.h \
- /usr/include/c++/15.2.1/limits /usr/include/c++/15.2.1/tr1/gamma.tcc \
+ /usr/include/c++/15.2.1/tr1/gamma.tcc \
  /usr/include/c++/15.2.1/tr1/special_function_util.h \
  /usr/include/c++/15.2.1/tr1/bessel_function.tcc \
  /usr/include/c++/15.2.1/tr1/beta_function.tcc \
@@ -223,114 +256,8 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /usr/include/c++/15.2.1/tr1/poly_hermite.tcc \
  /usr/include/c++/15.2.1/tr1/poly_laguerre.tcc \
  /usr/include/c++/15.2.1/tr1/riemann_zeta.tcc \
- /usr/include/c++/15.2.1/bits/valarray_array.h \
- /usr/include/c++/15.2.1/bits/valarray_array.tcc \
- /usr/include/c++/15.2.1/bits/valarray_before.h \
- /usr/include/c++/15.2.1/bits/slice_array.h \
- /usr/include/c++/15.2.1/bits/valarray_after.h \
- /usr/include/c++/15.2.1/bits/gslice.h \
- /usr/include/c++/15.2.1/bits/gslice_array.h \
- /usr/include/c++/15.2.1/bits/mask_array.h \
- /usr/include/c++/15.2.1/bits/indirect_array.h \
- /usr/include/c++/15.2.1/cstdint /usr/include/c++/15.2.1/version \
- /usr/include/c++/15.2.1/cassert /usr/include/assert.h \
- /usr/include/c++/15.2.1/cstring /usr/include/string.h \
- /usr/include/strings.h /usr/include/c++/15.2.1/filesystem \
- /usr/include/c++/15.2.1/bits/fs_fwd.h \
- /usr/include/c++/15.2.1/bits/chrono.h /usr/include/c++/15.2.1/ratio \
- /usr/include/c++/15.2.1/ctime \
- /usr/include/c++/15.2.1/bits/parse_numbers.h \
- /usr/include/c++/15.2.1/bits/fs_path.h /usr/include/c++/15.2.1/locale \
- /usr/include/c++/15.2.1/bits/locale_facets_nonio.h \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/time_members.h \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/messages_members.h \
- /usr/include/libintl.h /usr/include/c++/15.2.1/bits/codecvt.h \
- /usr/include/c++/15.2.1/bits/locale_facets_nonio.tcc \
- /usr/include/c++/15.2.1/bits/locale_conv.h \
- /usr/include/c++/15.2.1/iomanip \
- /usr/include/c++/15.2.1/bits/quoted_string.h \
- /usr/include/c++/15.2.1/sstream /usr/include/c++/15.2.1/bits/sstream.tcc \
- /usr/include/c++/15.2.1/codecvt /usr/include/c++/15.2.1/bits/fs_dir.h \
- /usr/include/c++/15.2.1/bits/fs_ops.h /usr/include/c++/15.2.1/numeric \
- /usr/include/c++/15.2.1/bits/stl_numeric.h \
- /usr/include/c++/15.2.1/pstl/glue_numeric_defs.h \
- /usr/include/c++/15.2.1/any /usr/include/c++/15.2.1/chrono \
- /usr/include/signal.h /usr/include/bits/signum-generic.h \
- /usr/include/bits/signum-arch.h /usr/include/bits/types/sig_atomic_t.h \
- /usr/include/bits/types/siginfo_t.h /usr/include/bits/types/__sigval_t.h \
- /usr/include/bits/siginfo-arch.h /usr/include/bits/siginfo-consts.h \
- /usr/include/bits/siginfo-consts-arch.h \
- /usr/include/bits/types/sigval_t.h /usr/include/bits/types/sigevent_t.h \
- /usr/include/bits/sigevent-consts.h /usr/include/bits/sigaction.h \
- /usr/include/bits/sigcontext.h /usr/include/bits/types/stack_t.h \
- /usr/include/sys/ucontext.h /usr/include/bits/sigstack.h \
- /usr/include/bits/sigstksz.h /usr/include/bits/ss_flags.h \
- /usr/include/bits/types/struct_sigstack.h /usr/include/bits/sigthread.h \
- /usr/include/bits/signal_ext.h /usr/include/sys/wait.h \
- /usr/include/bits/types/idtype_t.h /usr/include/sys/syscall.h \
- /usr/include/asm/unistd.h /usr/include/asm/unistd_64.h \
- /usr/include/bits/syscall.h \
- /home/rawmeat/repositories/fragarach/src/helper_functions.h \
- /usr/include/sys/stat.h /usr/include/bits/stat.h \
- /usr/include/bits/struct_stat.h /usr/include/bits/statx.h \
- /usr/include/linux/stat.h /usr/include/bits/statx-generic.h \
- /usr/include/bits/types/struct_statx_timestamp.h \
- /usr/include/bits/types/struct_statx.h /usr/include/dirent.h \
- /usr/include/bits/dirent.h /usr/include/bits/posix1_lim.h \
- /usr/include/bits/local_lim.h /usr/include/linux/limits.h \
- /usr/include/bits/dirent_ext.h /usr/include/fcntl.h \
- /usr/include/bits/fcntl.h /usr/include/bits/fcntl-linux.h \
- /usr/include/bits/types/struct_iovec.h /usr/include/linux/falloc.h \
- /usr/include/linux/openat2.h /usr/include/bits/openat2.h \
- /home/rawmeat/repositories/fragarach/src/json.hpp \
- /usr/include/c++/15.2.1/fstream \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
- /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
- /usr/include/c++/15.2.1/bits/fstream.tcc \
- /home/rawmeat/repositories/fragarach/src/inference/inference.h \
- /opt/libtorch/include/torch/script.h \
- /opt/libtorch/include/torch/csrc/api/include/torch/types.h \
- /opt/libtorch/include/ATen/ATen.h /opt/libtorch/include/ATen/Context.h \
- /opt/libtorch/include/ATen/BlasBackend.h \
- /opt/libtorch/include/c10/util/Exception.h \
- /opt/libtorch/include/c10/macros/Export.h \
- /opt/libtorch/include/torch/headeronly/macros/Export.h \
- /opt/libtorch/include/torch/headeronly/macros/cmake_macros.h \
- /opt/libtorch/include/c10/macros/Macros.h \
- /opt/libtorch/include/torch/headeronly/macros/Macros.h \
- /opt/libtorch/include/c10/util/Backtrace.h \
- /opt/libtorch/include/c10/util/Lazy.h /usr/include/c++/15.2.1/atomic \
- /opt/libtorch/include/c10/util/StringUtil.h \
- /opt/libtorch/include/c10/util/string_utils.h \
- /usr/include/c++/15.2.1/optional /usr/include/c++/15.2.1/variant \
- /usr/include/c++/15.2.1/bits/monostate.h \
- /opt/libtorch/include/torch/headeronly/util/Exception.h \
- /opt/libtorch/include/ATen/CPUGeneratorImpl.h \
- /opt/libtorch/include/ATen/core/Generator.h \
- /usr/include/c++/15.2.1/deque /usr/include/c++/15.2.1/bits/stl_deque.h \
- /usr/include/c++/15.2.1/bits/deque.tcc /usr/include/c++/15.2.1/mutex \
- /usr/include/c++/15.2.1/bits/std_mutex.h \
- /usr/include/c++/15.2.1/bits/unique_lock.h \
- /opt/libtorch/include/c10/util/intrusive_ptr.h \
- /opt/libtorch/include/c10/util/MaybeOwned.h \
- /usr/include/c++/15.2.1/climits \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/limits.h \
- /usr/lib/gcc/x86_64-pc-linux-gnu/15.2.1/include/syslimits.h \
- /usr/include/limits.h /usr/include/bits/posix2_lim.h \
- /usr/include/bits/xopen_lim.h /usr/include/bits/uio_lim.h \
- /opt/libtorch/include/c10/core/Device.h \
- /opt/libtorch/include/c10/core/DeviceType.h \
- /opt/libtorch/include/torch/headeronly/core/DeviceType.h \
- /opt/libtorch/include/c10/core/DispatchKeySet.h \
- /opt/libtorch/include/c10/core/DispatchKey.h \
- /opt/libtorch/include/c10/util/Metaprogramming.h \
- /opt/libtorch/include/torch/headeronly/util/Metaprogramming.h \
- /opt/libtorch/include/torch/headeronly/util/TypeList.h \
- /opt/libtorch/include/torch/headeronly/util/TypeTraits.h \
- /opt/libtorch/include/c10/util/TypeList.h \
- /opt/libtorch/include/c10/util/llvmMathExtras.h \
- /opt/libtorch/include/c10/util/bit_cast.h \
- /opt/libtorch/include/torch/headeronly/util/bit_cast.h \
+ /usr/include/c++/15.2.1/iterator \
+ /usr/include/c++/15.2.1/bits/stream_iterator.h \
  /opt/libtorch/include/c10/core/GeneratorImpl.h \
  /opt/libtorch/include/c10/core/TensorImpl.h \
  /opt/libtorch/include/c10/core/Allocator.h \
@@ -358,6 +285,9 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/c10/core/SymBool.h \
  /opt/libtorch/include/c10/core/SymNodeImpl.h \
  /opt/libtorch/include/c10/util/Optional.h \
+ /usr/include/c++/15.2.1/numeric \
+ /usr/include/c++/15.2.1/bits/stl_numeric.h \
+ /usr/include/c++/15.2.1/pstl/glue_numeric_defs.h \
  /opt/libtorch/include/c10/util/DimVector.h \
  /opt/libtorch/include/c10/core/impl/SizesAndStrides.h \
  /opt/libtorch/include/c10/util/python_stub.h \
@@ -370,6 +300,7 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/c10/util/Float8_e4m3fn.h \
  /opt/libtorch/include/torch/headeronly/util/Float8_e4m3fn.h \
  /opt/libtorch/include/torch/headeronly/util/floating_point_utils.h \
+ /usr/include/c++/15.2.1/iostream \
  /opt/libtorch/include/c10/util/Float8_e4m3fnuz.h \
  /opt/libtorch/include/torch/headeronly/util/Float8_e4m3fnuz.h \
  /opt/libtorch/include/torch/headeronly/util/Float8_fnuz_cvt.h \
@@ -453,7 +384,18 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/c10/util/CallOnce.h \
  /opt/libtorch/include/c10/util/C++17.h \
  /opt/libtorch/include/c10/util/env.h \
- /opt/libtorch/include/c10/util/hash.h \
+ /opt/libtorch/include/c10/util/hash.h /usr/include/c++/15.2.1/iomanip \
+ /usr/include/c++/15.2.1/locale \
+ /usr/include/c++/15.2.1/bits/locale_facets_nonio.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/time_members.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/messages_members.h \
+ /usr/include/libintl.h /usr/include/c++/15.2.1/bits/codecvt.h \
+ /usr/include/c++/15.2.1/bits/locale_facets_nonio.tcc \
+ /usr/include/c++/15.2.1/bits/locale_conv.h \
+ /usr/include/c++/15.2.1/bits/quoted_string.h /usr/include/c++/15.2.1/map \
+ /usr/include/c++/15.2.1/bits/stl_tree.h \
+ /usr/include/c++/15.2.1/bits/stl_map.h \
+ /usr/include/c++/15.2.1/bits/stl_multimap.h \
  /opt/libtorch/include/ATen/Device.h \
  /opt/libtorch/include/ATen/DeviceGuard.h \
  /opt/libtorch/include/ATen/core/IListRef.h \
@@ -935,7 +877,8 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/c10/util/FunctionRef.h \
  /opt/libtorch/include/c10/util/Logging.h \
  /opt/libtorch/include/c10/util/logging_is_not_google_glog.h \
- /usr/include/c++/15.2.1/set /usr/include/c++/15.2.1/bits/stl_set.h \
+ /usr/include/c++/15.2.1/chrono /usr/include/c++/15.2.1/set \
+ /usr/include/c++/15.2.1/bits/stl_set.h \
  /usr/include/c++/15.2.1/bits/stl_multiset.h \
  /opt/libtorch/include/c10/util/logging_common.h \
  /opt/libtorch/include/ATen/core/Tensor.h \
@@ -4863,6 +4806,10 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/torch/csrc/jit/runtime/operator_options.h \
  /opt/libtorch/include/torch/csrc/jit/serialization/import.h \
  /opt/libtorch/include/caffe2/serialize/inline_container.h \
+ /usr/include/c++/15.2.1/fstream \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/basic_file.h \
+ /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++io.h \
+ /usr/include/c++/15.2.1/bits/fstream.tcc \
  /opt/libtorch/include/caffe2/serialize/istream_adapter.h \
  /opt/libtorch/include/caffe2/serialize/read_adapter_interface.h \
  /opt/libtorch/include/caffe2/serialize/versions.h \
@@ -4905,4 +4852,25 @@ CMakeFiles/fragarach.dir/src/main.cpp.o: \
  /opt/libtorch/include/torch/csrc/jit/frontend/strtod.h \
  /opt/libtorch/include/torch/csrc/jit/frontend/schema_matching.h \
  /opt/libtorch/include/torch/csrc/jit/frontend/versioned_symbols.h \
- /opt/libtorch/include/torch/csrc/jit/frontend/tree_views.h
+ /opt/libtorch/include/torch/csrc/jit/frontend/tree_views.h \
+ /home/rawmeat/repositories/fragarach/src/inference/../syscall_graph/syscallGraph.h \
+ /home/rawmeat/repositories/fragarach/src/inference/../syscall_graph/../ebpf/event.h \
+ /home/rawmeat/repositories/fragarach/src/inference/../syscall_graph/../json.hpp \
+ /usr/include/c++/15.2.1/forward_list \
+ /usr/include/c++/15.2.1/bits/forward_list.h \
+ /usr/include/c++/15.2.1/bits/forward_list.tcc \
+ /usr/include/c++/15.2.1/valarray \
+ /usr/include/c++/15.2.1/bits/valarray_array.h \
+ /usr/include/c++/15.2.1/bits/valarray_array.tcc \
+ /usr/include/c++/15.2.1/bits/valarray_before.h \
+ /usr/include/c++/15.2.1/bits/slice_array.h \
+ /usr/include/c++/15.2.1/bits/valarray_after.h \
+ /usr/include/c++/15.2.1/bits/gslice.h \
+ /usr/include/c++/15.2.1/bits/gslice_array.h \
+ /usr/include/c++/15.2.1/bits/mask_array.h \
+ /usr/include/c++/15.2.1/bits/indirect_array.h \
+ /usr/include/c++/15.2.1/version /usr/include/c++/15.2.1/filesystem \
+ /usr/include/c++/15.2.1/bits/fs_fwd.h \
+ /usr/include/c++/15.2.1/bits/fs_path.h /usr/include/c++/15.2.1/codecvt \
+ /usr/include/c++/15.2.1/bits/fs_dir.h \
+ /usr/include/c++/15.2.1/bits/fs_ops.h /usr/include/c++/15.2.1/any

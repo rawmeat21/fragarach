@@ -166,6 +166,30 @@ src/helper_functions.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/helper_functions.cpp.s
 .PHONY : src/helper_functions.cpp.s
 
+src/inference/inference.o: src/inference/inference.cpp.o
+.PHONY : src/inference/inference.o
+
+# target to build an object file
+src/inference/inference.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/inference/inference.cpp.o
+.PHONY : src/inference/inference.cpp.o
+
+src/inference/inference.i: src/inference/inference.cpp.i
+.PHONY : src/inference/inference.i
+
+# target to preprocess a source file
+src/inference/inference.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/inference/inference.cpp.i
+.PHONY : src/inference/inference.cpp.i
+
+src/inference/inference.s: src/inference/inference.cpp.s
+.PHONY : src/inference/inference.s
+
+# target to generate assembly for a file
+src/inference/inference.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/fragarach.dir/build.make CMakeFiles/fragarach.dir/src/inference/inference.cpp.s
+.PHONY : src/inference/inference.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -275,6 +299,9 @@ help:
 	@echo "... src/helper_functions.o"
 	@echo "... src/helper_functions.i"
 	@echo "... src/helper_functions.s"
+	@echo "... src/inference/inference.o"
+	@echo "... src/inference/inference.i"
+	@echo "... src/inference/inference.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
