@@ -14,3 +14,5 @@ wget https://download.pytorch.org/libtorch/cpu/libtorch-shared-with-deps-2.10.0%
 echo "Extracting LibTorch..."
 unzip libtorch-*.zip -d /opt/
 rm libtorch-*.zip
+
+echo "Installation complete!"

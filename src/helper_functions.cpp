@@ -28,11 +28,14 @@ void rmRF(const std::string& path)
 {
     if(path=="") return;
 
+    std::cout<<path<<"\n";
+
     DIR* dir=opendir(path.c_str());
 
     if(dir==NULL)
     {
         std::cerr<<"Cannot open directory: "<<strerror(errno)<<"\n";
+	unlink(path.c_str());
         return ;
     }
 
@@ -47,21 +50,24 @@ void rmRF(const std::string& path)
         if(mod[mod.size()-1]!='/') mod.push_back('/');
         mod.append(ch->d_name);
 
+	std::cout<<mod<<"\n";
+
         lstat(mod.c_str(), &st);
 
-        if(S_ISLNK(st.st_mode))
+        /*if(S_ISLNK(st.st_mode) || S_ISREG(st.st_mode))
         {
-            unlink(mod.c_str());
-        }
-        else if(S_ISREG(st.st_mode))
-        {
-            unlink(mod.c_str());
-        }
-        else if(S_ISDIR(st.st_mode))
+            if(unlink(mod.c_str())) std::cerr<<"fahhhhh\n";
+        }*/
+        if(S_ISDIR(st.st_mode))
         {
             
             rmRF(mod); // safe to recurse, we know it's a real directory
+            //rmdir(mod.c_str());
         }
+	else
+	{
+	    if(unlink(mod.c_str())) std::cerr<<"fahhhhh\n";
+	}
     }
 
     closedir(dir);

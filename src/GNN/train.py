@@ -6,6 +6,10 @@ from torch_geometric.nn import GCNConv, global_mean_pool
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.loader import DataLoader
+from torch import Tensor
+from typing import Optional
+from torch_geometric.typing import OptTensor
+
 
 class SyscallDataset(InMemoryDataset):
     def __init__(self, root):
@@ -42,12 +46,12 @@ class MalwareGNN(nn.Module):
     def __init__(self):
         super().__init__()
         self.embedding = nn.Embedding(500, 16)
-        self.conv1 = GCNConv(17, 64) 
-        self.conv2 = GCNConv(64, 64)
+        self.conv1 = GCNConv(17, 64,normalize=False) 
+        self.conv2 = GCNConv(64, 64,normalize=False)
         self.classifier = nn.Linear(64, 2)
         self.dropout = nn.Dropout(p=0.5)
 
-    def forward(self, edge_index, edge_attr, sysc, blocked, batch):
+    def forward(self, edge_index: Tensor, edge_attr: Tensor, sysc: Tensor, blocked: Tensor, batch: Tensor):
         sysc_embedded = self.embedding(sysc)
         x = torch.cat([sysc_embedded, blocked], dim=1)
         
@@ -123,6 +127,24 @@ for epoch in range(100):
 
 torch.save(model.state_dict(), "/opt/fragarach/model.pt")
 
+
 model.eval()
-scripted = torch.jit.script(model)
-scripted.save("/opt/fragarach/model_scripted.pt")
+
+# 1. Prepare dummy data that matches your forward method EXACTLY
+# edge_index: [2, 10], edge_attr: [10, 1], sysc: [20], blocked: [20, 1], batch: [20]
+d_edge_index = torch.zeros((2, 10), dtype=torch.long).to(device)
+d_edge_attr  = torch.zeros((10, 1), dtype=torch.float).to(device)
+d_sysc       = torch.zeros((20,), dtype=torch.long).to(device)
+d_blocked    = torch.zeros((20, 1), dtype=torch.float).to(device)
+d_batch      = torch.zeros((20,), dtype=torch.long).to(device)
+
+# 2. Trace the model instead of scripting it
+try:
+    # We pass the inputs as a tuple
+    traced_model = torch.jit.trace(model, (d_edge_index, d_edge_attr, d_sysc, d_blocked, d_batch))
+    
+    # Save for C++
+    traced_model.save("/opt/fragarach/model_scripted.pt")
+    print("SUCCESS: Model traced and saved for C++.")
+except Exception as e:
+    print(f"Tracing failed: {e}")

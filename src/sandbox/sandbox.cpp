@@ -80,6 +80,7 @@ void Sandbox::resetOverlay()
 
 bool Sandbox::launch()
 {    
+    std::cout<<"Starting launch\n";
 
     // launches the binary as a child process
     resetOverlay();
@@ -89,6 +90,7 @@ bool Sandbox::launch()
         std::cerr << "Failed to copy binary into sandbox\n";
         return false;
     }
+    else std::cout<<"target copied\n";
 
     chmod("/opt/fragarach/overlay/upper/target",0755);
 
@@ -120,7 +122,7 @@ bool Sandbox::launch()
     }
 
     // PID has been assigned, child process is running with childPID
-    std::cout<<"Got PID: "<<childPID<<"\n";
+    std::cout<<"Got PIDD: "<<childPID<<"\n";
 
     /*
     // set up UID and GID mappings to the child process 
