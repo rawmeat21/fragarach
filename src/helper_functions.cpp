@@ -64,10 +64,10 @@ void rmRF(const std::string& path)
             rmRF(mod); // safe to recurse, we know it's a real directory
             //rmdir(mod.c_str());
         }
-	else
-	{
-	    if(unlink(mod.c_str())) std::cerr<<"fahhhhh\n";
-	}
+        else
+        {
+            if(unlink(mod.c_str())) std::cerr<<"fahhhhh\n";
+        }
     }
 
     closedir(dir);

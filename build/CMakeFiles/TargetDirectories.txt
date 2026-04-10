@@ -1,4 +1,0 @@
-/home/nigger/repos/fragarach/build/CMakeFiles/fragarach.dir
-/home/nigger/repos/fragarach/build/CMakeFiles/bpf_tracer.dir
-/home/nigger/repos/fragarach/build/CMakeFiles/edit_cache.dir
-/home/nigger/repos/fragarach/build/CMakeFiles/rebuild_cache.dir

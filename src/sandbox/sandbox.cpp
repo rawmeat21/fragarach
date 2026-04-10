@@ -320,6 +320,8 @@ static int childFunction(void* arg)
         nullptr
     };
 
+    
+
     // replace the child process by the binary process
     // system("ls");
 
@@ -363,6 +365,7 @@ static int childFunction(void* arg)
     close(sb->syncPipe[0]);
 
     std::cout<<"Started binary\n";
+    system("ls");
     execve(path,argv,envp);
 
     std::cerr<<"Failed to replace child process with target process: "<<strerror(errno)<<"\n";
@@ -377,5 +380,5 @@ void Sandbox::cleanup()
     // collect dead child
     waitpid(childPID,&status,0);
     rmdir(std::string("/sys/fs/cgroup/fragarach/"+std::to_string(childPID)).c_str());
-    resetOverlay();
+    // resetOverlay();
 }
