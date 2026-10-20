@@ -10,14 +10,23 @@ from torch import Tensor
 from typing import Optional
 from torch_geometric.typing import OptTensor
 
-
+# json -> graph
 class SyscallDataset(InMemoryDataset):
+
+    """
+    read every JSON graph export from disk, 
+    convert each one into a PyG Data object with the tensor shapes PyG expects, and cache the result
+    """
+
     def __init__(self, root):
+        # InMemoryDataset works on a convention: give it a root directory, and it expects a raw/ subfolder 
+        # and will create a processed/ subfolder (where it caches the converted result)
         super().__init__(root)
         self.load(self.processed_paths[0])
     
     @property
     def raw_file_names(self):
+        # what raw files do we expect to find?
         return os.listdir("/opt/fragarach/raw")
     
     @property
@@ -45,7 +54,11 @@ class SyscallDataset(InMemoryDataset):
 class MalwareGNN(nn.Module):
     def __init__(self):
         super().__init__()
-        self.embedding = nn.Embedding(500, 16)
+
+        # syscalls are categorical, they need to be convert to vectors
+        # This is a 500 row matrix with 16 cols, syscall x is mapped to row x of the matrix
+        # 16 is hyperparameter
+        self.embedding = nn.Embedding(500, 16) 
         self.conv1 = GCNConv(17, 64,normalize=False) 
         self.conv2 = GCNConv(64, 64,normalize=False)
         self.classifier = nn.Linear(64, 2)
@@ -131,7 +144,6 @@ torch.save(model.state_dict(), "/opt/fragarach/model.pt")
 model.eval()
 
 # 1. Prepare dummy data that matches your forward method EXACTLY
-# edge_index: [2, 10], edge_attr: [10, 1], sysc: [20], blocked: [20, 1], batch: [20]
 d_edge_index = torch.zeros((2, 10), dtype=torch.long).to(device)
 d_edge_attr  = torch.zeros((10, 1), dtype=torch.float).to(device)
 d_sysc       = torch.zeros((20,), dtype=torch.long).to(device)

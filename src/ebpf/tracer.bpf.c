@@ -2,7 +2,6 @@
 #include <bpf/bpf_helpers.h>
 #include <bpf/bpf_tracing.h>
 #include <linux/ptrace.h>
-// weird syntax incoming... libbpf works like this sadly
 
 struct event {
     __u32 pid;
@@ -12,7 +11,8 @@ struct event {
 
 // ring buffer to send events to userspace
 struct {
-    __uint(type, BPF_MAP_TYPE_RINGBUF);
+    // __uint() is a macro, 
+    __uint(type, BPF_MAP_TYPE_RINGBUF);// equivalent for int (*type)[BPF_MAP_TYPE_RINGBUF];
     __uint(max_entries, 1 << 24); // buffer size is 16MB
 } events SEC(".maps");
 

@@ -4,7 +4,6 @@
 class Sandbox
 {
 public:
-
     Sandbox(std::string_view binaryPath);
 
     const std::string& getBinaryPath();
@@ -26,7 +25,7 @@ public:
     int seccompPipe[2];
     
 private:
-    std::string binaryPath;
+    std::string binaryPath;// the literal path to the binary that we will run
     int timeoutTime=60;
     size_t memLimit=512*1024*1024;
     int pidLimit=32;

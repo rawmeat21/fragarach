@@ -32,9 +32,9 @@ struct COOGraph
 
 class SyscallGraph
 {
-    std::map<std::pair<uint32_t,uint32_t>,uint32_t> edges;
-    std::map<uint32_t,uint8_t> nodes;
-    std::map<uint32_t,uint32_t> syscVertex;
+    std::map<std::pair<uint32_t,uint32_t>,uint32_t> edges;// (syscall A, syscall B) -> how many times A was followed by B
+    std::map<uint32_t,uint8_t> nodes;// syscall number -> was it ever blocked?
+    std::map<uint32_t,uint32_t> syscVertex;// syscall number -> vertex index (0,1,2,...)
 
 public:
     void build(const std::vector<event>& events);

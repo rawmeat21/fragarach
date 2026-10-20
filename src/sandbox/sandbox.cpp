@@ -80,6 +80,8 @@ void Sandbox::resetOverlay()
 
 bool Sandbox::launch()
 {    
+    // launches the binary
+
     std::cout<<"Starting launch\n";
 
     // launches the binary as a child process
@@ -230,8 +232,6 @@ bool Sandbox::isRunning()
 
 static int childFunction(void* arg)
 {
-    
-
     // this function will run inside the child process, which will be complete clone of the parent
 
     // get the original sandbox object (passed into clone() earlier in Sandbox::launch())
@@ -326,7 +326,7 @@ static int childFunction(void* arg)
     // system("ls");
 
     // drop capabilities to target, it can try to do bad things but it can't
-    cap_t caps=cap_get_proc();
+    cap_t caps=cap_get_proc();// get capabilites list
     cap_clear(caps);
     cap_set_proc(caps);
     cap_free(caps);
